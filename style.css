@@ -1,73 +1,65 @@
-/* تنسيق عام للموقع */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: #0f172a; /* اللون الكحلي الفخم */
+    background-color: #0f172a;
     font-family: 'Cairo', sans-serif;
     color: #f8fafc;
-    direction: rtl; /* لضبط الاتجاه العربي */
+    direction: rtl;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
 }
 
-/* الحاوية الرئيسية */
-.main-content {
+.server-header {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
     width: 100%;
-    max-width: 450px; /* عرض مناسب للموبايل */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* مسافة ثابتة بين الكروت */
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 2px solid #0ea5e9;
 }
 
-/* تنسيق الكروت (الزراير) */
+.ns-badge {
+    background: #0ea5e9;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 450px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .action-card {
     background: #1e293b;
     border: 1px solid #334155;
     border-radius: 15px;
-    padding: 20px;
+    padding: 18px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* توزيع الأيقونة والنص */
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
 .action-card:active {
     transform: scale(0.96);
-    background: #161e2e;
+    background: #26334d;
 }
 
-/* منطقة النصوص داخل الكارت */
-.card-info {
-    flex-grow: 1;
-    text-align: right;
-    margin-right: 15px;
-}
-
-.card-info h3 {
-    font-size: 1.1rem;
-    color: #f1f5f9;
-    margin-bottom: 5px;
-}
-
-.card-info p {
-    font-size: 0.8rem;
-    color: #94a3b8;
-}
-
-/* الأيقونة الجانبية */
 .card-icon {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     background: rgba(14, 165, 233, 0.1);
     border-radius: 12px;
     display: flex;
@@ -77,39 +69,33 @@ body {
     color: #0ea5e9;
 }
 
-/* النقطة الخضراء (أونلاين) */
+.card-info {
+    flex-grow: 1;
+    margin-right: 15px;
+    text-align: right;
+}
+
+.card-info h3 { font-size: 1rem; color: #f1f5f9; }
+.card-info p { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+
 .status-dot {
-    width: 10px;
-    height: 10px;
-    background-color: #22c55e;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
     border-radius: 50%;
-    box-shadow: 0 0 10px #22c55e;
-    margin-left: 10px;
+    box-shadow: 0 0 8px #22c55e;
+    margin-left: 5px;
 }
 
-/* صورة السيرفر في الأسفل */
-.server-promo {
-    width: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #334155;
-    margin-top: 10px;
-}
-
-.server-promo img {
-    width: 100%;
-    display: block;
-}
-
-/* النافذة المنبثقة (Modal) عشان ما تبوظش الشكل */
+/* Modal Styling */
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
     align-items: center;
     justify-content: center;
 }
@@ -119,13 +105,29 @@ body {
     width: 90%;
     max-width: 380px;
     border-radius: 20px;
-    padding: 25px;
+    padding: 20px;
     border: 1px solid #0ea5e9;
+    animation: fadeIn 0.3s ease;
 }
 
-footer {
-    padding: 30px;
-    font-size: 0.75rem;
-    color: #475569;
-    text-align: center;
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.leader-card {
+    background: #0f172a;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-right: 3px solid #0ea5e9;
 }
+
+.leader-icon { color: #f59e0b; font-size: 1.2rem; }
+.leader-info h3 { font-size: 0.95rem; margin: 0; }
+.leader-info p { font-size: 0.75rem; color: #38bdf8; }
+
+.close-btn { font-size: 24px; color: #94a3b8; cursor: pointer; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+footer { padding: 30px; font-size: 0.7rem; color: #475569; }
