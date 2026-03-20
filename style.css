@@ -1,150 +1,131 @@
-* { box-sizing: border-box; }
-body {
-    background-color: #0f172a; /* خلفية داكنة فخمة */
-    font-family: 'Cairo', sans-serif;
+/* تنسيق عام للموقع */
+* {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0f172a; /* اللون الكحلي الفخم */
+    font-family: 'Cairo', sans-serif;
     color: #f8fafc;
-}
-
-.server-header {
-    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                url('https://www.transparenttextures.com/patterns/cubes.png');
-    padding: 50px 20px;
-    text-align: center;
-    border-bottom: 3px solid #0ea5e9;
-}
-
-.ns-badge {
-    display: inline-block;
-    background: #0ea5e9;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-.server-header h1 { margin: 0; font-size: 1.8rem; color: #fff; }
-.server-header p { margin: 10px 0 0; font-size: 0.9rem; color: #94a3b8; }
-
-.main-content {
-    max-width: 500px;
-    margin: -30px auto 40px; /* تداخل بسيط مع الهيدر */
-    padding: 0 15px;
+    direction: rtl; /* لضبط الاتجاه العربي */
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* الحاوية الرئيسية */
+.main-content {
+    width: 100%;
+    max-width: 450px; /* عرض مناسب للموبايل */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* مسافة ثابتة بين الكروت */
+}
+
+/* تنسيق الكروت (الزراير) */
 .action-card {
     background: #1e293b;
     border: 1px solid #334155;
     border-radius: 15px;
-    padding: 18px;
+    padding: 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* توزيع الأيقونة والنص */
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.action-card:hover {
-    background: #334155;
-    border-color: #0ea5e9;
-    transform: scale(1.02);
+.action-card:active {
+    transform: scale(0.96);
+    background: #161e2e;
 }
 
+/* منطقة النصوص داخل الكارت */
+.card-info {
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.card-info h3 {
+    font-size: 1.1rem;
+    color: #f1f5f9;
+    margin-bottom: 5px;
+}
+
+.card-info p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* الأيقونة الجانبية */
 .card-icon {
     width: 45px;
     height: 45px;
     background: rgba(14, 165, 233, 0.1);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    color: #0ea5e9;
-    margin-left: 15px;
-}
-
-.card-info h3 { margin: 0; font-size: 1rem; color: #e2e8f0; }
-.card-info p { margin: 3px 0 0; font-size: 0.8rem; color: #64748b; }
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: auto; /* يخليها في أقصى اليسار */
-}
-.online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-
-.server-promo {
-    margin-top: 20px;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 2px solid #334155;
-}
-.server-promo img { width: 100%; display: block; filter: brightness(0.8); }
-
-footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #475569; }
-/* تصميم النافذة المنبثقة */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.8); /* تعتيم الخلفية */
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية */
-}
-
-.modal-content {
-    background-color: #1e293b;
-    width: 85%;
-    max-width: 400px;
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid #0ea5e9;
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 10px;
-}
-
-.close-btn {
-    font-size: 28px;
-    color: #94a3b8;
-    cursor: pointer;
-}
-
-.sub-card {
-    background: #0f172a;
-    padding: 15px;
-    margin-bottom: 10px;
     border-radius: 12px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    transition: 0.2s;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #0ea5e9;
 }
 
-.sub-card:active { transform: scale(0.98); background: #334155; }
+/* النقطة الخضراء (أونلاين) */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #22c55e;
+    margin-left: 10px;
+}
 
-.sub-card i { color: #0ea5e9; font-size: 1.2rem; }
-.sub-card span { font-weight: bold; font-size: 0.95rem; }
+/* صورة السيرفر في الأسفل */
+.server-promo {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    margin-top: 10px;
+}
+
+.server-promo img {
+    width: 100%;
+    display: block;
+}
+
+/* النافذة المنبثقة (Modal) عشان ما تبوظش الشكل */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #1e293b;
+    width: 90%;
+    max-width: 380px;
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #0ea5e9;
+}
+
+footer {
+    padding: 30px;
+    font-size: 0.75rem;
+    color: #475569;
+    text-align: center;
+}
