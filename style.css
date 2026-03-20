@@ -1,19 +1,90 @@
+* { box-sizing: border-box; }
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #0f172a; /* خلفية داكنة فخمة */
+    font-family: 'Cairo', sans-serif;
     margin: 0;
+    color: #f8fafc;
+}
+
+.server-header {
+    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                url('https://www.transparenttextures.com/patterns/cubes.png');
+    padding: 50px 20px;
     text-align: center;
+    border-bottom: 3px solid #0ea5e9;
 }
-header {
-    background-color: #2c3e50;
+
+.ns-badge {
+    display: inline-block;
+    background: #0ea5e9;
     color: white;
-    padding: 20px;
-}
-.card {
-    background: white;
-    margin: 20px auto;
-    padding: 20px;
-    width: 80%;
+    padding: 5px 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
+
+.server-header h1 { margin: 0; font-size: 1.8rem; color: #fff; }
+.server-header p { margin: 10px 0 0; font-size: 0.9rem; color: #94a3b8; }
+
+.main-content {
+    max-width: 500px;
+    margin: -30px auto 40px; /* تداخل بسيط مع الهيدر */
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 15px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-card:hover {
+    background: #334155;
+    border-color: #0ea5e9;
+    transform: scale(1.02);
+}
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #0ea5e9;
+    margin-left: 15px;
+}
+
+.card-info h3 { margin: 0; font-size: 1rem; color: #e2e8f0; }
+.card-info p { margin: 3px 0 0; font-size: 0.8rem; color: #64748b; }
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: auto; /* يخليها في أقصى اليسار */
+}
+.online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+
+.server-promo {
+    margin-top: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #334155;
+}
+.server-promo img { width: 100%; display: block; filter: brightness(0.8); }
+
+footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #475569; }
