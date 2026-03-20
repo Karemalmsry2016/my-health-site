@@ -11,101 +11,91 @@
 <body>
 
     <header class="server-header">
-        <div class="logo-area">
-            <div class="ns-badge">NS x 97</div>
-            <h1>وزارة الصحة - الرياض</h1>
-            <p>بوابة الخدمات الإلكترونية الموحدة</p>
-        </div>
+        <div class="ns-badge">NS x 97</div>
+        <h1>وزارة الصحة - الرياض</h1>
+        <p>البوابة الرقمية الموحدة للقطاع الصحي</p>
     </header>
 
     <div class="main-content">
-        <a href="#" class="action-card">
+        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="action-card">
             <div class="card-icon"><i class="fas fa-id-card-alt"></i></div>
             <div class="card-info">
                 <h3>انضم إلى الطاقم الطبي</h3>
-                <p>تقديم طلب توظيف جديد بالوزارة</p>
+                <p>إعلانات التوظيف والتقديم الجديد</p>
             </div>
             <span class="status-dot online"></span>
         </a>
 
-        <a href="#" class="action-card">
-            <div class="card-icon"><i class="fas fa-search-location"></i></div>
+        <a href="https://discord.com/channels/1458621814975631524/1478985216889720832" class="action-card">
+            <div class="card-icon"><i class="fas fa-award"></i></div>
             <div class="card-info">
-                <h3>نتائج القبول</h3>
-                <p>استعلام عن حالة الطلبات السابقة</p>
+                <h3>النتائج والترقيات</h3>
+                <p>الاستعلام عن التعيينات الجديدة</p>
             </div>
         </a>
 
-        <a href="#" class="action-card">
+        <a href="https://discord.com/channels/1458621814975631524/1478981935417004125" class="action-card">
             <div class="card-icon"><i class="fab fa-discord"></i></div>
             <div class="card-info">
-                <h3>المواعيد (ديسكورد)</h3>
-                <p>تنسيق الكشوفات عبر السيرفر الرسمي</p>
+                <h3>حجز موعد (ديسكورد)</h3>
+                <p>تنسيق الكشوفات الطبية الفورية</p>
             </div>
         </a>
 
-        <a href="#" class="action-card">
-            <div class="card-icon"><i class="fas fa-book-medical"></i></div>
+        <a href="https://discord.com/channels/1458621814975631524/1478982927017578628" class="action-card">
+            <div class="card-icon"><i class="fas fa-file-signature"></i></div>
             <div class="card-info">
-                <h3>الدليل الإجرائي</h3>
-                <p>قوانين ولوائح العمل الصحي بالميدان</p>
+                <h3>تعميمات وزارة الصحة</h3>
+                <p>الأنظمة واللوائح المعتمدة</p>
             </div>
         </a>
 
-        <div class="server-promo">
-            <img src="https://via.placeholder.com/600x300?text=NS+x+97+RIYADH" alt="NS x 97">
+        <a href="javascript:void(0)" class="action-card highlight" onclick="openModal()">
+            <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+            <div class="card-info">
+                <h3>بيانات القطاع</h3>
+                <p>مجلس القيادة العليا والهوية</p>
+            </div>
+        </a>
+    </div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>مجلس القيادة العليا</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="leader-card">
+                    <div class="leader-icon"><i class="fas fa-crown"></i></div>
+                    <div class="leader-info">
+                        <h3>ريان الشريف</h3>
+                        <p>وزير الصحة</p>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-icon"><i class="fas fa-star"></i></div>
+                    <div class="leader-info">
+                        <h3>كريم السيد</h3>
+                        <p>نائب وزير الصحة</p>
+                    </div>
+                </div>
+                <div class="sub-card info-only">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>نظام العمل: 24 ساعة تحت الخدمة</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>بوابة NS x 97 رياض التعليمية | جميع الحقوق محفوظة</p>
+        <p>بوابة NS x 97 سيرفر رياض | 2026 ©</p>
     </footer>
-    <a href="javascript:void(0)" class="action-card" onclick="openModal()">
-    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-    <div class="card-info">
-        <h3>بيانات القطاع</h3>
-        <p>تعرف على الهوية والرؤية الخاصة بنا</p>
-    </div>
-</a>
 
-<div id="aboutModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>بيانات القطاع</h2>
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="sub-card">
-                <i class="fas fa-crown"></i>
-                <span>مجلس القيادة العليا</span>
-            </div>
-            <div class="sub-card">
-                <i class="fas fa-sitemap"></i>
-                <span>التسلسل الإداري</span>
-            </div>
-            <div class="sub-card">
-                <i class="fas fa-history"></i>
-                <span>سجل الإنجازات</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-function openModal() {
-    document.getElementById("aboutModal").style.display = "flex";
-}
-function closeModal() {
-    document.getElementById("aboutModal").style.display = "none";
-}
-// إغلاق النافذة عند الضغط خارجها
-window.onclick = function(event) {
-    let modal = document.getElementById("aboutModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-    
+    <script>
+        function openModal() { document.getElementById("aboutModal").style.display = "flex"; }
+        function closeModal() { document.getElementById("aboutModal").style.display = "none"; }
+        window.onclick = function(e) { if(e.target == document.getElementById("aboutModal")) closeModal(); }
+    </script>
 </body>
 </html>
