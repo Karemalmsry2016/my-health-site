@@ -16,6 +16,10 @@
         </a>
         <h1>وزارة الصحة - الرياض</h1>
         <p>البوابة الرقمية الموحدة للقطاع الصحي</p>
+        
+        <div id="datetime-container" class="datetime-info">
+            <span id="current-date"></span> | <span id="current-time"></span>
+        </div>
     </header>
 
     <div class="main-content">
@@ -87,12 +91,25 @@
     </div>
 
     <footer>
-        <p>بوابة NS x 79 الرياض التعليمية | 2026 ©</p>
+        <p>بوابة NS x 79 الرياض  | 2026 ©</p>
     </footer>
 
     <script>
         function openModal() { document.getElementById("aboutModal").style.display = "flex"; }
         function closeModal() { document.getElementById("aboutModal").style.display = "none"; }
+
+        // سكريبت تحديث الساعة والتاريخ
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            
+            document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG', dateOptions);
+            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', timeOptions);
+        }
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
     </script>
 </body>
 </html>
