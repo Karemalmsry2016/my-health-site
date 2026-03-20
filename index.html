@@ -60,6 +60,52 @@
     <footer>
         <p>بوابة NS x 97 رياض التعليمية | جميع الحقوق محفوظة</p>
     </footer>
+    <a href="javascript:void(0)" class="action-card" onclick="openModal()">
+    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+    <div class="card-info">
+        <h3>بيانات القطاع</h3>
+        <p>تعرف على الهوية والرؤية الخاصة بنا</p>
+    </div>
+</a>
 
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>بيانات القطاع</h2>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="sub-card">
+                <i class="fas fa-crown"></i>
+                <span>مجلس القيادة العليا</span>
+            </div>
+            <div class="sub-card">
+                <i class="fas fa-sitemap"></i>
+                <span>التسلسل الإداري</span>
+            </div>
+            <div class="sub-card">
+                <i class="fas fa-history"></i>
+                <span>سجل الإنجازات</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("aboutModal").style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("aboutModal").style.display = "none";
+}
+// إغلاق النافذة عند الضغط خارجها
+window.onclick = function(event) {
+    let modal = document.getElementById("aboutModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+    
 </body>
 </html>
