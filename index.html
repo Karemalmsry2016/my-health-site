@@ -4,9 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزارة الصحة | NS x 79 الرياض</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 1. الإعدادات العامة */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body {
+            background-color: #0b1120; color: #f8fafc; direction: rtl;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; overflow-x: hidden; position: relative;
+        }
+
+        /* 2. الخلفية بنمط الأرابيسك والشعار المتحرك */
+        .background-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-color: #0b1120;
+            background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
+            background-repeat: repeat; opacity: 0.4;
+        }
+
+        .moving-logo {
+            position: absolute; width: 400px; height: 400px;
+            background-image: url('https://lh3.googleusercontent.com/d/1Xl0W7mQ09v-f1U-0Hl9H-L7L-H-L7L-H'); 
+            background-size: contain; background-repeat: no-repeat;
+            opacity: 0.15; filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(14, 165, 233, 0.4));
+            animation: floatAround 25s infinite ease-in-out;
+        }
+        .logo-1 { top: 10%; left: -5%; }
+        .logo-2 { bottom: 10%; right: -5%; animation-delay: -5s; animation-direction: reverse; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(40px, 60px) rotate(10deg); }
+        }
+
+        /* 3. الهيدر */
+        .server-header {
+            background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(15px);
+            width: 100%; padding: 40px 20px; text-align: center;
+            border-bottom: 3px solid #0ea5e9; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10;
+        }
+        .ns-badge {
+            background: #0ea5e9; color: white; padding: 6px 20px; border-radius: 10px;
+            font-weight: bold; display: inline-block; margin-bottom: 15px;
+        }
+        .datetime-info {
+            font-size: 0.9rem; color: #0ea5e9; background: rgba(14, 165, 233, 0.1);
+            padding: 10px 20px; border-radius: 50px; display: inline-flex; gap: 15px;
+            border: 1px solid rgba(14, 165, 233, 0.3); font-weight: bold; margin-top: 15px;
+        }
+
+        /* 4. محتوى الأزرار */
+        .main-content {
+            width: 100%; max-width: 480px; padding: 30px 20px;
+            display: flex; flex-direction: column; gap: 18px; z-index: 10;
+        }
+        .action-card {
+            background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(10px);
+            border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 20px;
+            padding: 22px; display: flex; align-items: center;
+            text-decoration: none; color: inherit; transition: 0.3s;
+        }
+        .action-card:hover { 
+            border-color: #0ea5e9; background: rgba(38, 51, 77, 0.95);
+            transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .card-icon {
+            width: 50px; height: 50px; background: rgba(14, 165, 233, 0.15);
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #0ea5e9;
+        }
+        .card-info { flex-grow: 1; margin-right: 20px; text-align: right; }
+        .card-info h3 { font-size: 1.1rem; color: #f1f5f9; }
+        .card-info p { font-size: 0.8rem; color: #94a3b8; }
+        .highlight-apply { border: 2px solid #22c55e !important; }
+        .doc-highlight { border: 2px solid #0ea5e9 !important; }
+
+        /* 5. النافذة المنبثقة */
+        .modal {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0; 
+            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px); align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #1e293b; width: 90%; max-width: 400px;
+            border-radius: 25px; padding: 30px; border: 1px solid #0ea5e9;
+        }
+        .leader-card {
+            background: #0f172a; padding: 15px; margin-bottom: 12px;
+            border-radius: 15px; display: flex; align-items: center; gap: 15px;
+            border-right: 5px solid #0ea5e9;
+        }
+        footer { padding: 40px; font-size: 0.8rem; color: #475569; text-align: center; }
+    </style>
 </head>
 <body>
 
@@ -16,13 +106,10 @@
     </div>
 
     <header class="server-header">
-        <a href="https://discord.gg/ns-1" target="_blank" class="ns-link">
-            <div class="ns-badge">NS x 79</div>
-        </a>
+        <div class="ns-badge">NS x 79</div>
         <h1>وزارة الصحة - الرياض</h1>
         <p>البوابة الرقمية الموحدة للقطاع الصحي</p>
-        
-        <div id="datetime-container" class="datetime-info">
+        <div class="datetime-info">
             <span id="current-date"></span> | <span id="current-time"></span>
         </div>
     </header>
@@ -30,90 +117,37 @@
     <div class="main-content">
         <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="action-card highlight-apply">
             <div class="card-icon"><i class="fas fa-file-medical"></i></div>
-            <div class="card-info">
-                <h3>تقديم طلب انضمام</h3>
-                <p>نموذج التوظيف الإلكتروني الموحد</p>
-            </div>
-            <span class="status-dot online"></span>
+            <div class="card-info"><h3>تقديم طلب انضمام</h3><p>نموذج التوظيف الإلكتروني الموحد</p></div>
         </a>
-
         <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="action-card doc-highlight">
             <div class="card-icon"><i class="fas fa-database"></i></div>
-            <div class="card-info">
-                <h3>مستند بيانات الصحة</h3>
-                <p>سجل الموظفين، الأكواد، والبيانات الإدارية</p>
-            </div>
+            <div class="card-info"><h3>مستند بيانات الصحة</h3><p>سجل الموظفين والأكواد</p></div>
         </a>
-
-        <a href="https://discord.com/channels/1458621814975631524/1478985216889720832" class="action-card">
-            <div class="card-icon"><i class="fas fa-award"></i></div>
-            <div class="card-info">
-                <h3>النتائج والترقيات</h3>
-                <p>الاستعلام عن التعيينات الجديدة</p>
-            </div>
-        </a>
-
-        <a href="https://discord.com/channels/1458621814975631524/1478981935417004125" class="action-card">
-            <div class="card-icon"><i class="fab fa-discord"></i></div>
-            <div class="card-info">
-                <h3>حجز موعد (ديسكورد)</h3>
-                <p>تنسيق الكشوفات الطبية الفورية</p>
-            </div>
-        </a>
-
-        <a href="javascript:void(0)" class="action-card highlight" onclick="openModal()">
+        <a href="javascript:void(0)" class="action-card" onclick="openModal()">
             <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-            <div class="card-info">
-                <h3>بيانات القطاع</h3>
-                <p>مجلس القيادة العليا والهوية</p>
-            </div>
+            <div class="card-info"><h3>بيانات القطاع</h3><p>مجلس القيادة العليا</p></div>
         </a>
     </div>
 
     <div id="aboutModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>مجلس القيادة العليا</h2>
-                <span class="close-btn" onclick="closeModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="leader-card">
-                    <div class="leader-icon"><i class="fas fa-crown"></i></div>
-                    <div class="leader-info">
-                        <h3>ريان الشريف</h3>
-                        <p>وزير الصحة</p>
-                    </div>
-                </div>
-                <div class="leader-card">
-                    <div class="leader-icon"><i class="fas fa-star"></i></div>
-                    <div class="leader-info">
-                        <h3>كريم السيد</h3>
-                        <p>نائب وزير الصحة</p>
-                    </div>
-                </div>
-            </div>
+            <div class="leader-card"><h3>ريان الشريف</h3><p>وزير الصحة</p></div>
+            <div class="leader-card"><h3>كريم السيد</h3><p>نائب الوزير</p></div>
+            <button onclick="closeModal()" style="width:100%; padding:10px; background:#0ea5e9; border:none; color:white; border-radius:10px; cursor:pointer;">إغلاق</button>
         </div>
     </div>
 
-    <footer>
-        <p>بوابة NS x 79 الرياض | 2026 ©</p>
-    </footer>
+    <footer>بوابة NS x 79 الرياض | 2026 ©</footer>
 
     <script>
         function openModal() { document.getElementById("aboutModal").style.display = "flex"; }
         function closeModal() { document.getElementById("aboutModal").style.display = "none"; }
-
         function updateDateTime() {
             const now = new Date();
-            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            
-            document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG', dateOptions);
-            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', timeOptions);
+            document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG');
+            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG');
         }
-        
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
+        setInterval(updateDateTime, 1000); updateDateTime();
     </script>
 </body>
 </html>
