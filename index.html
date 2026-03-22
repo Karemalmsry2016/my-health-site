@@ -10,6 +10,11 @@
 </head>
 <body>
 
+    <div class="background-overlay">
+        <div class="moving-logo logo-1"></div>
+        <div class="moving-logo logo-2"></div>
+    </div>
+
     <header class="server-header">
         <a href="https://discord.gg/ns-1" target="_blank" class="ns-link">
             <div class="ns-badge">NS x 79</div>
@@ -91,14 +96,13 @@
     </div>
 
     <footer>
-        <p>بوابة NS x 79 الرياض  | 2026 ©</p>
+        <p>بوابة NS x 79 الرياض | 2026 ©</p>
     </footer>
 
     <script>
         function openModal() { document.getElementById("aboutModal").style.display = "flex"; }
         function closeModal() { document.getElementById("aboutModal").style.display = "none"; }
 
-        // سكريبت تحديث الساعة والتاريخ
         function updateDateTime() {
             const now = new Date();
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -106,6 +110,14 @@
             
             document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG', dateOptions);
             document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', timeOptions);
+        }
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
+document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', timeOptions);
         }
         
         setInterval(updateDateTime, 1000);
