@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #0f172a;
+    background-color: #0b1120;
     color: #f8fafc;
     direction: rtl;
     display: flex;
@@ -15,16 +15,53 @@ body {
     align-items: center;
     min-height: 100vh;
     line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* 2. الهيدر (العنوان والساعة) */
+/* 2. نظام الخلفية المتحركة (الشعارات) */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+.moving-logo {
+    position: absolute;
+    width: 350px; /* حجم الشعار في الخلفية */
+    height: 350px;
+    background-image: url('logo.png'); /* تأكد من وجود ملف شعارك باسم logo.png */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1; /* شفافية عالية ليكون مجرد خلفية */
+    filter: blur(1px);
+    animation: floatAround 25s infinite ease-in-out;
+}
+
+.logo-1 { top: 10%; left: -5%; animation-duration: 30s; }
+.logo-2 { bottom: 5%; right: -5%; animation-duration: 40s; animation-direction: reverse; }
+
+@keyframes floatAround {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(30px, 50px) rotate(5deg) scale(1.05); }
+    66% { transform: translate(-20px, 20px) rotate(-5deg) scale(0.95); }
+}
+
+/* 3. الهيدر (العنوان والساعة) */
 .server-header {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
     width: 100%;
     padding: 30px 20px;
     text-align: center;
     border-bottom: 2px solid #0ea5e9;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 10;
 }
 
 .ns-badge {
@@ -41,7 +78,6 @@ body {
 .server-header h1 { font-size: 1.8rem; margin-bottom: 5px; color: #fff; }
 .server-header p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px; }
 
-/* تنسيق الساعة والتاريخ */
 .datetime-info {
     font-size: 0.85rem;
     color: #0ea5e9;
@@ -56,7 +92,7 @@ body {
 
 #current-time { color: #f8fafc; }
 
-/* 3. محتوى الأزرار */
+/* 4. محتوى الأزرار */
 .main-content {
     width: 100%;
     max-width: 450px;
@@ -64,11 +100,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    z-index: 10;
 }
 
 .action-card {
-    background: #1e293b;
-    border: 1px solid #334155;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(51, 65, 85, 0.5);
     border-radius: 16px;
     padding: 18px;
     display: flex;
@@ -78,10 +116,14 @@ body {
     transition: all 0.2s ease;
 }
 
-.action-card:hover { border-color: #0ea5e9; background: #26334d; }
+.action-card:hover { 
+    border-color: #0ea5e9; 
+    background: rgba(38, 51, 77, 0.9);
+    transform: translateY(-2px);
+}
+
 .action-card:active { transform: scale(0.97); }
 
-/* تمييز الأزرار الخاصة */
 .highlight-apply { border: 1px solid #22c55e !important; position: relative; overflow: hidden; }
 .doc-highlight { border: 1px solid #0ea5e9 !important; }
 
@@ -107,14 +149,14 @@ body {
     box-shadow: 0 0 8px #22c55e; 
 }
 
-/* 4. النافذة المنبثقة (Modal) */
+/* 5. النافذة المنبثقة (Modal) */
 .modal {
     display: none; 
     position: fixed; 
     z-index: 2000; 
     top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
     align-items: center; justify-content: center;
 }
 
@@ -127,13 +169,6 @@ body {
     border: 1px solid #0ea5e9;
     position: relative;
 }
-
-.modal-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px;
-}
-
-.close-btn { font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
 
 .leader-card {
     background: #0f172a;
@@ -148,13 +183,14 @@ body {
 
 .leader-icon { color: #facc15; font-size: 1.2rem; }
 
-/* 5. الفوتر */
+/* 6. الفوتر */
 footer {
     margin-top: auto;
     padding: 30px;
     font-size: 0.7rem;
     color: #475569;
     text-align: center;
+    z-index: 10;
 }
 
 /* أنيميشن اللمعان لزر التقديم */
@@ -167,4 +203,4 @@ footer {
     content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
     animation: shine 4s infinite;
-}
+    }
