@@ -16,73 +16,61 @@
             min-height: 100vh; overflow-x: hidden; position: relative;
         }
 
-        /* الخلفية والأرابيسك */
+        /* 1. الخلفية الملكية (أرابيسك + شعار) */
         .background-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
-            background-repeat: repeat; opacity: 0.25;
+            background-repeat: repeat; opacity: 0.2;
         }
 
+        /* 2. الهيدر الرسمي */
         .server-header {
             background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px);
-            width: 100%; padding: 25px; text-align: center;
-            border-bottom: 3px solid var(--primary); z-index: 100;
+            width: 100%; padding: 30px; text-align: center;
+            border-bottom: 3px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* شريط الأخبار */
-        .news-ticker {
-            background: rgba(14, 165, 233, 0.1); width: 100%; overflow: hidden;
-            padding: 8px 0; border-bottom: 1px solid rgba(14, 165, 233, 0.2);
-        }
-        .ticker-content { display: inline-block; animation: ticker 30s linear infinite; color: var(--primary); font-size: 0.85rem; font-weight: bold; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .container { width: 100%; max-width: 500px; padding: 20px; z-index: 10; display: flex; flex-direction: column; gap: 20px; }
 
-        /* الأقسام التفاعلية */
-        .container { width: 100%; max-width: 500px; padding: 20px; z-index: 10; display: flex; flex-direction: column; gap: 15px; }
-
-        /* البحث عن المخالفات */
-        .search-section {
-            background: rgba(30, 41, 59, 0.7); border-radius: 20px; padding: 20px;
-            border: 1px solid rgba(14, 165, 233, 0.3); text-align: center;
+        /* 3. نظام استعلام الموظفين (الميزة الجديدة) */
+        .check-system {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 25px; padding: 25px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+            text-align: center;
         }
-        .search-box {
-            display: flex; gap: 10px; margin-top: 10px;
+        .check-system h2 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
+        .input-group { display: flex; gap: 10px; margin-top: 15px; }
+        .input-group input {
+            flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #334155;
+            background: #0b1120; color: white; outline: none; text-align: center;
         }
-        .search-box input {
-            flex: 1; padding: 10px; border-radius: 10px; border: none; background: #0f172a; color: white; outline: none;
-        }
-        .search-box button {
-            padding: 10px 20px; background: var(--primary); border: none; color: white; border-radius: 10px; cursor: pointer;
+        .btn-check {
+            background: var(--primary); color: white; border: none;
+            padding: 0 20px; border-radius: 12px; cursor: pointer; font-weight: bold;
         }
 
-        /* الكروت */
+        /* 4. الأزرار الرئيسية */
         .action-card {
             background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px);
-            border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 20px;
-            padding: 18px; display: flex; align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px;
+            padding: 20px; display: flex; align-items: center;
             text-decoration: none; color: inherit; transition: 0.3s;
         }
-        .action-card:hover { transform: translateY(-3px); border-color: var(--primary); background: rgba(38, 51, 77, 0.9); }
-        
-        .card-icon { width: 45px; height: 45px; background: rgba(14, 165, 233, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.3rem; }
+        .action-card:hover { transform: scale(1.02); border-color: var(--primary); background: rgba(38, 51, 77, 0.9); }
+        .card-icon { width: 50px; height: 50px; background: rgba(14, 165, 233, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem; }
         .card-info { flex: 1; margin-right: 15px; }
-        .card-info h3 { font-size: 1rem; }
-        .card-info p { font-size: 0.75rem; color: #94a3b8; }
 
-        /* الزي الرسمي (Grid) */
-        .uniform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .uniform-item { background: #0f172a; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #1e293b; }
-        .uniform-item i { font-size: 2rem; color: var(--primary); display: block; margin-bottom: 5px; }
-
-        /* المودال (النافذة) */
+        /* 5. النوافذ المنبثقة */
         .modal {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center;
         }
-        .modal-content { background: #1e293b; width: 90%; max-width: 420px; border-radius: 25px; padding: 25px; border: 1px solid var(--primary); position: relative; }
-        .close-btn { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
+        .modal-content { background: #1e293b; width: 90%; max-width: 420px; border-radius: 25px; padding: 30px; border: 1px solid var(--primary); position: relative; text-align: center;}
+        .close-btn { position: absolute; top: 15px; left: 15px; font-size: 1.5rem; cursor: pointer; }
 
-        footer { padding: 30px; font-size: 0.75rem; color: #475569; text-align: center; }
+        footer { padding: 40px; font-size: 0.8rem; color: #475569; text-align: center; }
     </style>
 </head>
 <body>
@@ -90,60 +78,52 @@
     <div class="background-overlay"></div>
 
     <header class="server-header">
-        <div style="background: var(--primary); color: white; display: inline-block; padding: 4px 12px; border-radius: 7px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px;">NS x 79 الرياض</div>
-        <h1>وزارة الصحة الرقمية</h1>
-        <p style="color: #94a3b8; font-size: 0.9rem;">نظام إدارة القطاع الصحي الموحد</p>
+        <div style="background: var(--primary); color: white; padding: 5px 15px; border-radius: 8px; display: inline-block; font-size: 0.8rem; margin-bottom: 10px;">نظام الرياض NS x 79</div>
+        <h1>وزارة الصحة السعودية</h1>
+        <p>البوابة الرقمية الموحدة لإدارة القطاع الصحي</p>
     </header>
 
-    <div class="news-ticker">
-        <div class="ticker-content">
-            <span>📢 إعلان: فتح باب التقديم لدفعة المسعفين الجديدة..</span>
-            <span>⚠️ تنبيه: يمنع العمل خارج النطاق العمراني بدون إذن القيادة..</span>
-            <span>✅ تم تحديث دليل الزي الرسمي لعام 2026..</span>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="search-section">
-            <h3 style="font-size: 0.9rem; margin-bottom: 5px;"><i class="fas fa-search"></i> استعلام الموظفين</h3>
-            <p style="font-size: 0.7rem; color: #94a3b8;">أدخل كودك الطبي للتحقق من السجل الإداري</p>
-            <div class="search-box">
-                <input type="text" id="empCode" placeholder="مثال: MOH-101">
-                <button onclick="checkStatus()">بحث</button>
+        
+        <div class="check-system">
+            <h2><i class="fas fa-user-shield"></i> استعلام الملازمين والموظفين</h2>
+            <p style="font-size: 0.8rem; color: #94a3b8;">تحقق من رتبتك، سجل مخالفاتك، وحالتك الإدارية</p>
+            <div class="input-group">
+                <input type="text" id="employeeCode" placeholder="أدخل الكود الطبي (مثال: MOH-77)">
+                <button class="btn-check" onclick="runCheck()">استعلام</button>
             </div>
-            <div id="searchResult" style="margin-top: 15px; font-size: 0.85rem; display: none;"></div>
+            <div id="resultBox" style="margin-top: 20px; display: none; padding: 15px; border-radius: 12px; background: rgba(0,0,0,0.3);"></div>
         </div>
 
-        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="action-card" style="border-right: 4px solid var(--success);">
-            <div class="card-icon"><i class="fas fa-id-card"></i></div>
-            <div class="card-info"><h3>تقديم انضمام</h3><p>بوابة التوظيف الإلكتروني</p></div>
+        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="action-card">
+            <div class="card-icon"><i class="fas fa-file-signature"></i></div>
+            <div class="card-info"><h3>تقديم طلب توظيف</h3><p>انضم للكادر الطبي الرسمي</p></div>
         </a>
 
         <a href="#" class="action-card" onclick="openModal('uniformModal')">
             <div class="card-icon"><i class="fas fa-tshirt"></i></div>
-            <div class="card-info"><h3>دليل الزي الرسمي</h3><p>كتالوج لبس الرتب المعتمد</p></div>
+            <div class="card-info"><h3>دليل الزي الموحد</h3><p>عرض صور اللبس المعتمد لكل رتبة</p></div>
         </a>
 
         <a href="#" class="action-card" onclick="openModal('reportModal')">
-            <div class="card-icon" style="color: var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
-            <div class="card-info"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للوزير</p></div>
+            <div class="card-icon" style="color: var(--danger);"><i class="fas fa-user-secret"></i></div>
+            <div class="card-info"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة العليا</p></div>
         </a>
 
         <a href="#" class="action-card" onclick="openModal('leaderModal')">
             <div class="card-icon"><i class="fas fa-crown"></i></div>
-            <div class="card-info"><h3>القيادة العليا</h3><p>ريان الشريف & كريم السيد</p></div>
+            <div class="card-info"><h3>مجلس الوزارة</h3><p>ريان الشريف | كريم السيد</p></div>
         </a>
+
     </div>
 
     <div id="uniformModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('uniformModal')">×</span>
-            <h3 style="text-align: center; color: var(--primary); margin-bottom: 15px;">دليل الزي الموحد</h3>
-            <div class="uniform-grid">
-                <div class="uniform-item"><i class="fas fa-user-md"></i><span>طبيب استشاري</span></div>
-                <div class="uniform-item"><i class="fas fa-ambulance"></i><span>مسعف ميداني</span></div>
-                <div class="uniform-item"><i class="fas fa-pills"></i><span>صيدلي</span></div>
-                <div class="uniform-item"><i class="fas fa-shield-alt"></i><span>أمن المستشفى</span></div>
+            <h3 style="color: var(--primary); margin-bottom: 20px;">دليل الرتب والزي</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="background: #0b1120; padding: 15px; border-radius: 15px;"><i class="fas fa-user-md" style="font-size: 2rem; color: var(--primary);"></i><p>استشاري</p></div>
+                <div style="background: #0b1120; padding: 15px; border-radius: 15px;"><i class="fas fa-ambulance" style="font-size: 2rem; color: var(--primary);"></i><p>مسعف</p></div>
             </div>
         </div>
     </div>
@@ -151,38 +131,36 @@
     <div id="reportModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('reportModal')">×</span>
-            <h3 style="text-align: center; color: var(--danger); margin-bottom: 15px;">بلاغ إداري سري</h3>
-            <textarea placeholder="اكتب تفاصيل البلاغ هنا..." style="width: 100%; height: 100px; background: #0f172a; border: 1px solid #1e293b; color: white; padding: 10px; border-radius: 10px; resize: none;"></textarea>
-            <button style="width: 100%; padding: 12px; background: var(--danger); border: none; color: white; border-radius: 10px; margin-top: 10px; font-weight: bold; cursor: pointer;">إرسال للبوابة السرية</button>
+            <h3 style="color: var(--danger); margin-bottom: 15px;">تقديم بلاغ سري</h3>
+            <textarea placeholder="اكتب تفاصيل الإهمال أو الشكوى هنا..." style="width: 100%; height: 120px; background: #0b1120; border: 1px solid #334155; color: white; border-radius: 12px; padding: 10px; resize: none;"></textarea>
+            <button style="width: 100%; padding: 12px; background: var(--danger); border: none; color: white; border-radius: 12px; margin-top: 15px; font-weight: bold;">إرسال للوزارة</button>
         </div>
     </div>
 
     <div id="leaderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('leaderModal')">×</span>
-            <div style="background: #0f172a; padding: 15px; border-radius: 15px; margin-bottom: 10px; border-right: 4px solid var(--primary);">
-                <h3>ريان الشريف</h3><p style="color: var(--primary);">وزير الصحة</p>
-            </div>
-            <div style="background: #0f172a; padding: 15px; border-radius: 15px; border-right: 4px solid var(--primary);">
-                <h3>كريم السيد</h3><p style="color: var(--primary);">نائب وزير الصحة</p>
-            </div>
+            <div style="margin-bottom: 15px; padding: 15px; background: #0b1120; border-radius: 15px; border-right: 4px solid var(--primary);"><h3>ريان الشريف</h3><p style="color: var(--primary);">وزير الصحة</p></div>
+            <div style="padding: 15px; background: #0b1120; border-radius: 15px; border-right: 4px solid var(--primary);"><h3>كريم السيد</h3><p style="color: var(--primary);">نائب الوزير</p></div>
         </div>
     </div>
 
-    <footer>حقوق النشر © بوابة وزارة الصحة | الرياض NS x 79 - 2026</footer>
+    <footer>بوابة وزارة الصحة الرقمية | 2026 ©</footer>
 
     <script>
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        function checkStatus() {
-            let code = document.getElementById('empCode').value.toUpperCase();
-            let res = document.getElementById('searchResult');
-            res.style.display = 'block';
-            if(code === "MOH-101") {
-                res.innerHTML = "<span style='color: var(--success);'>✅ الملف نظيف | الرتبة: مسعف أول</span>";
+        function runCheck() {
+            let code = document.getElementById('employeeCode').value.trim().toUpperCase();
+            let box = document.getElementById('resultBox');
+            box.style.display = 'block';
+            
+            // مثال لبيانات تجريبية
+            if(code === "MOH-101" || code === "101") {
+                box.innerHTML = "<h4 style='color: var(--success);'>✅ السجل نظيف</h4><p style='font-size: 0.8rem;'>الرتبة: مسعف أول<br>المخالفات: لا يوجد</p>";
             } else {
-                res.innerHTML = "<span style='color: var(--danger);'>❌ كود غير مسجل أو عليه مخالفات نشطة</span>";
+                box.innerHTML = "<h4 style='color: var(--danger);'>⚠️ تنبيه</h4><p style='font-size: 0.8rem;'>الكود غير مسجل أو يرجى مراجعة شؤون الموظفين</p>";
             }
         }
     </script>
