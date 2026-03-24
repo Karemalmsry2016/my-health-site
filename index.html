@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* إعدادات الألوان والتنسيق العام */
         :root {
             --primary: #0ea5e9;
             --success: #22c55e;
@@ -16,14 +17,16 @@
             --warning: #f59e0b;
             --dark-bg: #0b1120;
             --card-bg: rgba(30, 41, 59, 0.7);
-            --transition: all 0.3s ease;
+            --border-color: rgba(14, 165, 233, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
 
         body {
             background-color: var(--dark-bg);
-            color: #f8fafc;
+            color: var(--text-main);
             direction: rtl;
             min-height: 100vh;
             display: flex;
@@ -32,7 +35,7 @@
             overflow-x: hidden;
         }
 
-        /* الهيدر الاحترافي */
+        /* الهيدر الرئيسي */
         .main-header {
             width: 100%;
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
@@ -40,34 +43,41 @@
             text-align: center;
             border-bottom: 4px solid var(--primary);
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
         }
 
         .ns-badge {
             background: var(--primary);
             color: white;
-            padding: 7px 22px;
+            padding: 7px 25px;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             display: inline-block;
             margin-bottom: 18px;
             box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
         }
 
-        .main-header h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; }
+        .main-header h1 { font-size: 2.2rem; font-weight: 900; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-        .datetime-wrapper {
-            margin-top: 20px;
+        .datetime-display {
+            margin-top: 25px;
             display: flex;
             justify-content: center;
-            gap: 25px;
-            font-size: 1rem;
-            color: #94a3b8;
+            gap: 30px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .datetime-wrapper span i { color: var(--primary); margin-left: 8px; }
+        .datetime-display i { color: var(--primary); margin-left: 8px; }
 
-        /* حاوية الأزرار */
+        /* الحاوية الرئيسية */
         .app-container {
             width: 100%;
             max-width: 500px;
@@ -77,28 +87,33 @@
             gap: 15px;
         }
 
-        /* الاستعلام */
-        .search-section {
+        /* قسم الاستعلام */
+        .search-card {
             background: var(--card-bg);
             border-radius: 25px;
             padding: 25px;
-            border: 1px solid rgba(14, 165, 233, 0.2);
+            border: 1px solid var(--border-color);
             text-align: center;
+            backdrop-filter: blur(10px);
             margin-bottom: 10px;
         }
 
-        .input-group { display: flex; gap: 10px; margin-top: 15px; }
+        .search-card h3 { color: var(--primary); text-align: right; margin-bottom: 15px; font-size: 1.2rem; }
+        
+        .input-group { display: flex; gap: 10px; }
         .input-field {
             flex: 1; padding: 15px; border-radius: 15px; border: 1px solid #334155;
             background: #0f172a; color: white; text-align: center; outline: none;
+            transition: 0.3s;
         }
+        .input-field:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(14, 165, 233, 0.2); }
 
-        .btn-main {
-            padding: 0 20px; background: var(--primary); border: none;
+        .btn-search {
+            padding: 0 25px; background: var(--primary); border: none;
             color: white; border-radius: 15px; cursor: pointer; font-weight: bold;
         }
 
-        /* البطاقات (الأزرار) */
+        /* الأزرار والبطاقات */
         .nav-item {
             background: var(--card-bg);
             border-radius: 20px;
@@ -106,58 +121,58 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: white;
+            color: var(--text-main);
             border: 1px solid transparent;
-            transition: var(--transition);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
 
         .nav-item:hover {
-            transform: translateX(-8px);
+            transform: translateX(-10px);
             border-color: var(--primary);
-            background: rgba(30, 41, 59, 0.9);
+            background: #1e293b;
         }
 
-        .icon-circle {
+        .icon-box {
             width: 55px; height: 55px;
             background: rgba(14, 165, 233, 0.1);
             border-radius: 15px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--primary);
+            font-size: 1.6rem; color: var(--primary);
         }
 
-        .text-content { flex: 1; margin-right: 15px; text-align: right; }
-        .text-content h3 { font-size: 1.1rem; margin-bottom: 3px; }
-        .text-content p { font-size: 0.8rem; color: #94a3b8; }
+        .nav-content { flex: 1; margin-right: 18px; text-align: right; }
+        .nav-content h3 { font-size: 1.1rem; margin-bottom: 4px; font-weight: 700; }
+        .nav-content p { font-size: 0.8rem; color: var(--text-muted); }
 
         /* النوافذ (Modals) */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
         }
 
         .modal-box {
-            background: #1e293b; width: 85%; max-width: 400px; padding: 35px;
-            border-radius: 25px; border: 1px solid var(--primary); text-align: center; position: relative;
+            background: #1e293b; width: 85%; max-width: 420px; padding: 40px;
+            border-radius: 30px; border: 1px solid var(--primary); text-align: center; position: relative;
         }
 
-        .close-x { position: absolute; top: 15px; left: 15px; color: #94a3b8; cursor: pointer; }
+        .close-modal { position: absolute; top: 20px; left: 20px; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; }
 
-        /* الإدارة */
+        /* لوحة الإدارة */
         #adminPanel {
             display: none; background: #0f172a; border: 2px solid var(--success);
             border-radius: 25px; padding: 25px; margin-top: 20px;
         }
 
-        .admin-btn-trigger {
-            font-size: 0.75rem; color: #475569; text-align: center; 
-            padding: 30px; cursor: pointer; text-decoration: underline;
+        .admin-btn {
+            font-size: 0.8rem; color: #475569; text-align: center; 
+            padding: 40px; cursor: pointer; text-decoration: underline;
         }
 
-        #resultArea {
-            margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.3);
-            border-radius: 15px; display: none; border-right: 4px solid var(--primary); text-align: right;
+        #resultBox {
+            margin-top: 15px; padding: 20px; background: rgba(0,0,0,0.3);
+            border-radius: 15px; display: none; border-right: 5px solid var(--primary); text-align: right;
         }
     </style>
 </head>
@@ -166,140 +181,152 @@
     <header class="main-header">
         <div class="ns-badge">NS x 79 RIYADH</div>
         <h1>وزارة الصحة</h1>
-        <div class="datetime-wrapper">
-            <span><i class="fas fa-calendar-alt"></i> <span id="displayDate">-- / -- / ----</span></span>
-            <span><i class="fas fa-clock"></i> <span id="displayTime">00:00:00</span></span>
+        <div class="datetime-display">
+            <span><i class="fas fa-calendar-day"></i> <span id="currentDate">-- / -- / ----</span></span>
+            <span><i class="fas fa-clock"></i> <span id="currentTime">00:00:00</span></span>
         </div>
     </header>
 
     <main class="app-container">
         
-        <section class="search-section">
-            <h3 style="text-align:right; color:var(--primary);"><i class="fas fa-search"></i> استعلام الموظفين</h3>
+        <section class="search-card">
+            <h3><i class="fas fa-id-card"></i> استعلام الموظفين</h3>
             <div class="input-group">
-                <input type="text" id="searchInput" class="input-field" placeholder="أدخل كود الموظف">
-                <button class="btn-main" onclick="runSearch()">استعلام</button>
+                <input type="text" id="empIDInput" class="input-field" placeholder="أدخل كود الموظف">
+                <button class="btn-search" onclick="searchEmployee()">بحث</button>
             </div>
-            <div id="resultArea"></div>
+            <div id="resultBox"></div>
         </section>
 
         <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="nav-item" style="border-right: 5px solid var(--success);">
-            <div class="icon-circle" style="color:var(--success);"><i class="fas fa-user-plus"></i></div>
-            <div class="text-content"><h3>تقديم طلب توظيف</h3><p>الالتحاق بالكادر الطبي لقطاع الرياض</p></div>
+            <div class="icon-box" style="color:var(--success);"><i class="fas fa-user-plus"></i></div>
+            <div class="nav-content"><h3>تقديم طلب توظيف</h3><p>الالتحاق بالكادر الطبي لقطاع الرياض</p></div>
         </a>
 
         <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="nav-item">
-            <div class="icon-circle"><i class="fas fa-database"></i></div>
-            <div class="text-content"><h3>مستند البيانات</h3><p>الأكواد والسجلات الرسمية للموظفين</p></div>
+            <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
+            <div class="nav-content"><h3>مستند بيانات المسعفين</h3><p>السجلات والأكواد الرسمية (Google Sheets)</p></div>
+        </a>
+
+        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="nav-item" style="border-right: 5px solid var(--warning);">
+            <div class="icon-box" style="color:var(--warning);"><i class="fas fa-medal"></i></div>
+            <div class="nav-content"><h3>طلب ترقية (رفع رتبة)</h3><p>تقديم ملف الإنجازات الشهري للإدارة</p></div>
         </a>
 
         <a href="https://discord.com/channels/1458621814975631524/1478981935417004125" class="nav-item">
-            <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
-            <div class="text-content"><h3>حجز موعد طبي</h3><p>تنسيق الكشوفات واللقاحات للمواطنين</p></div>
+            <div class="icon-box"><i class="fas fa-notes-medical"></i></div>
+            <div class="nav-content"><h3>حجز موعد طبي</h3><p>تنسيق الكشوفات واللقاحات للمواطنين</p></div>
         </a>
 
-        <div class="nav-item" onclick="openModal('uniformModal')">
-            <div class="icon-circle"><i class="fas fa-tshirt"></i></div>
-            <div class="text-content"><h3>دليل الزي الرسمي</h3><p>اللباس المعتمد لجميع الرتب</p></div>
+        <div class="nav-item" onclick="showPop('uniformPop')">
+            <div class="icon-box"><i class="fas fa-tshirt"></i></div>
+            <div class="nav-content"><h3>دليل الزي المعتمد</h3><p>شكل اللباس لكل رتبة إدارية</p></div>
         </div>
 
-        <div class="nav-item" onclick="openModal('reportModal')">
-            <div class="icon-circle" style="color:var(--danger);"><i class="fas fa-exclamation-circle"></i></div>
-            <div class="text-content"><h3>بلاغ إداري سري</h3><p>شكوى مباشرة تصل للقيادة العليا</p></div>
+        <div class="nav-item" onclick="showPop('reportPop')">
+            <div class="icon-box" style="color:var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="nav-content"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مشفرة للقيادة العليا</p></div>
         </div>
 
-        <div class="nav-item" onclick="openModal('leaderModal')">
-            <div class="icon-circle" style="color:var(--warning);"><i class="fas fa-crown"></i></div>
-            <div class="text-content"><h3>مجلس القيادة العليا</h3><p>الهيكل الإداري لوزارة الصحة</p></div>
+        <div class="nav-item" onclick="showPop('leaderPop')">
+            <div class="icon-box" style="color: var(--warning);"><i class="fas fa-crown"></i></div>
+            <div class="nav-content"><h3>مجلس القيادة</h3><p>هيكل وزارة الصحة (ريان & كريم)</p></div>
         </div>
 
-        <div class="admin-btn-trigger" onclick="tryAdmin()">دخول الإدارة (Admin Login)</div>
+        <div class="admin-btn" onclick="openAdmin()">دخول لوحة الإدارة (Admin Only)</div>
         
         <div id="adminPanel">
-            <h3 style="color:var(--success); margin-bottom:15px;">تحديث بيانات موظف</h3>
-            <input type="text" id="admId" class="input-field" placeholder="الكود" style="width:100%; margin-bottom:10px;">
-            <input type="text" id="admRank" class="input-field" placeholder="الرتبة" style="width:100%; margin-bottom:10px;">
-            <input type="text" id="admNote" class="input-field" placeholder="المخالفات" style="width:100%; margin-bottom:10px;">
-            <button class="btn-main" onclick="saveToDB()" style="width:100%; padding:15px; background:var(--success);">حفظ في قاعدة البيانات</button>
-            <button onclick="document.getElementById('adminPanel').style.display='none'" style="background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer; width:100%;">إغلاق</button>
+            <h3 style="color:var(--success); margin-bottom:15px;">تعديل بيانات النظام</h3>
+            <input type="text" id="admID" class="input-field" placeholder="كود الموظف" style="width:100%; margin-bottom:10px;">
+            <input type="text" id="admRank" class="input-field" placeholder="الرتبة الجديدة" style="width:100%; margin-bottom:10px;">
+            <input type="text" id="admStatus" class="input-field" placeholder="حالة المخالفات" style="width:100%; margin-bottom:10px;">
+            <button class="btn-search" onclick="saveData()" style="width:100%; padding:15px; background:var(--success);">حفظ التغييرات</button>
+            <button onclick="document.getElementById('adminPanel').style.display='none'" style="background:none; border:none; color:var(--text-muted); margin-top:10px; cursor:pointer; width:100%;">إغلاق</button>
         </div>
 
     </main>
 
-    <div id="uniformModal" class="modal-overlay">
-        <div class="modal-box"><i class="fas fa-times close-x" onclick="closeModal('uniformModal')"></i>
+    <div id="uniformPop" class="modal-overlay">
+        <div class="modal-box"><i class="fas fa-times close-modal" onclick="hidePop('uniformPop')"></i>
             <h2 style="color:var(--primary); margin-bottom:15px;">دليل الزي</h2>
-            <p>يجب الالتزام بالزي الرسمي المحدد في القوانين الوزارية حسب الرتبة.</p>
+            <p>يجب الالتزام بالزي المعتمد في ديسكورد الوزارة حسب كل رتبة.</p>
         </div>
     </div>
 
-    <div id="reportModal" class="modal-overlay">
-        <div class="modal-box"><i class="fas fa-times close-x" onclick="closeModal('reportModal')"></i>
+    <div id="reportPop" class="modal-overlay">
+        <div class="modal-box"><i class="fas fa-times close-modal" onclick="hidePop('reportPop')"></i>
             <h2 style="color:var(--danger); margin-bottom:15px;">بلاغ سري</h2>
-            <textarea class="input-field" style="width:100%; height:100px;" placeholder="اكتب تفاصيل البلاغ هنا..."></textarea>
-            <button class="btn-main" style="width:100%; margin-top:10px; padding:12px; background:var(--danger)">إرسال البلاغ</button>
+            <textarea class="input-field" style="width:100%; height:120px;" placeholder="اكتب تفاصيل البلاغ هنا..."></textarea>
+            <button class="btn-search" style="width:100%; margin-top:10px; padding:12px; background:var(--danger)">إرسال للبث المباشر</button>
         </div>
     </div>
 
-    <div id="leaderModal" class="modal-overlay">
-        <div class="modal-box"><i class="fas fa-times close-x" onclick="closeModal('leaderModal')"></i>
-            <h2 style="color:var(--warning); margin-bottom:20px;">القيادة العليا</h2>
-            <div style="text-align:right; background:rgba(0,0,0,0.2); padding:15px; border-radius:15px; margin-bottom:10px; border-right:4px solid var(--warning);">
+    <div id="leaderPop" class="modal-overlay">
+        <div class="modal-box"><i class="fas fa-times close-modal" onclick="hidePop('leaderPop')"></i>
+            <h2 style="color:var(--warning); margin-bottom:25px;">قيادة وزارة الصحة</h2>
+            <div style="text-align:right; background:rgba(0,0,0,0.3); padding:15px; border-radius:15px; margin-bottom:10px; border-right:5px solid var(--warning);">
                 <b>ريان الشريف</b><br><small>وزير الصحة</small>
             </div>
-            <div style="text-align:right; background:rgba(0,0,0,0.2); padding:15px; border-radius:15px; border-right:4px solid var(--primary);">
+            <div style="text-align:right; background:rgba(0,0,0,0.3); padding:15px; border-radius:15px; border-right:5px solid var(--primary);">
                 <b>كريم السيد</b><br><small>نائب وزير الصحة</small>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. نظام الوقت (تم فحصه)
-        function startClock() {
+        // برمجة الساعة والتاريخ
+        function initClock() {
             setInterval(() => {
                 const now = new Date();
-                const timeStr = now.toLocaleTimeString('ar-EG');
-                const dateStr = now.toLocaleDateString('ar-EG', {day:'numeric', month:'long', year:'numeric'});
-                document.getElementById('displayTime').innerText = timeStr;
-                document.getElementById('displayDate').innerText = dateStr;
+                const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+                document.getElementById('currentTime').innerText = now.toLocaleTimeString('en-GB', timeOptions);
+                document.getElementById('currentDate').innerText = now.toLocaleDateString('ar-EG');
             }, 1000);
         }
-        startClock();
+        initClock();
 
-        // 2. التحكم في النوافذ
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        // التحكم في النوافذ
+        function showPop(id) { document.getElementById(id).style.display = 'flex'; }
+        function hidePop(id) { document.getElementById(id).style.display = 'none'; }
 
-        // 3. الإدارة
-        function tryAdmin() {
-            const u = prompt("User:");
-            const p = prompt("Pass:");
+        // نظام الإدارة
+        function openAdmin() {
+            const u = prompt("اسم المستخدم:");
+            const p = prompt("كلمة المرور:");
             if(u === "Admin" && p === "@Admin") {
                 document.getElementById('adminPanel').style.display = 'block';
-                window.scrollTo(0, document.body.scrollHeight);
-            } else { alert("خطأ في البيانات!"); }
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } else { alert("عذراً، الصلاحية مرفوضة!"); }
         }
 
-        function saveToDB() {
-            const id = document.getElementById('admId').value;
+        function saveData() {
+            const id = document.getElementById('admID').value;
             const r = document.getElementById('admRank').value;
-            const n = document.getElementById('admNote').value || "سليم";
+            const s = document.getElementById('admStatus').value || "سليم";
             if(id && r) {
-                localStorage.setItem('DB_HEALTH_'+id, JSON.stringify({rank: r, note: n}));
-                alert("تم تحديث بيانات الموظف " + id);
-            }
+                localStorage.setItem('MOH_DATA_'+id, JSON.stringify({rank: r, status: s}));
+                alert("تم تحديث قاعدة البيانات بنجاح للموظف " + id);
+                document.getElementById('admID').value = '';
+                document.getElementById('admRank').value = '';
+            } else { alert("يرجى إدخال الكود والرتبة!"); }
         }
 
-        // 4. البحث
-        function runSearch() {
-            const id = document.getElementById('searchInput').value;
-            const res = document.getElementById('resultArea');
-            const data = localStorage.getItem('DB_HEALTH_'+id);
+        // نظام البحث
+        function searchEmployee() {
+            const id = document.getElementById('empIDInput').value.trim();
+            const res = document.getElementById('resultBox');
+            const data = localStorage.getItem('MOH_DATA_'+id);
             res.style.display = 'block';
             if(data) {
                 const info = JSON.parse(data);
-                res.innerHTML = `<p><b>الرتبة:</b> ${info.rank}</p><p><b>الحالة:</b> ${info.note}</p>`;
-            } else { res.innerHTML = `<p style="color:var(--danger)">الكود غير موجود في النظام!</p>`; }
+                res.innerHTML = `
+                    <div style="font-size:1.1rem; border-bottom:1px solid #334155; padding-bottom:10px; margin-bottom:10px;">نتائج الكود: ${id}</div>
+                    <p><b>الرتبة الحالية:</b> <span style="color:var(--primary)">${info.rank}</span></p>
+                    <p><b>السجل الإداري:</b> ${info.status}</p>
+                `;
+            } else {
+                res.innerHTML = `<p style="color:var(--danger)">الكود (${id}) غير موجود في قاعدة بيانات الرياض.</p>`;
+            }
         }
     </script>
 </body>
