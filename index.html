@@ -77,15 +77,15 @@
         .stat-number { font-size: 1.3rem; font-weight: bold; color: #0ea5e9; display: block; }
         .stat-label { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; }
 
-        /* 5. نظام الاستعلام الجديد (Search Section) */
+        /* 5. نظام الاستعلام */
         .search-section {
             width: 90%; max-width: 440px; background: rgba(30, 41, 59, 0.7);
-            border-radius: 20px; padding: 20px; margin: 10px 0;
+            border-radius: 20px; padding: 15px; margin: 10px 0;
             border: 1px solid rgba(14, 165, 233, 0.3); z-index: 10; text-align: center;
         }
         .search-box { display: flex; gap: 10px; margin-top: 10px; }
-        .search-box input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #334155; background: #0b1120; color: white; outline: none; }
-        .search-box button { padding: 0 20px; background: #0ea5e9; border: none; color: white; border-radius: 12px; cursor: pointer; font-weight: bold; }
+        .search-box input { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #334155; background: #0b1120; color: white; outline: none; }
+        .search-box button { padding: 0 15px; background: #0ea5e9; border: none; color: white; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
         /* 6. محتوى الأزرار */
         .main-content {
@@ -95,23 +95,24 @@
         .action-card {
             background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(10px);
             border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 20px;
-            padding: 20px; display: flex; align-items: center;
-            text-decoration: none; color: inherit; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 18px; display: flex; align-items: center;
+            text-decoration: none; color: inherit; transition: 0.3s;
         }
         .action-card:hover { 
             border-color: #0ea5e9; background: rgba(38, 51, 77, 0.95);
             transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         .card-icon {
-            width: 55px; height: 55px; background: rgba(14, 165, 233, 0.15);
-            border-radius: 16px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; color: #0ea5e9;
+            width: 50px; height: 50px; background: rgba(14, 165, 233, 0.15);
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #0ea5e9;
         }
         .card-info { flex-grow: 1; margin-right: 15px; text-align: right; }
         .card-info h3 { font-size: 1.05rem; color: #f1f5f9; margin-bottom: 2px; }
         .card-info p { font-size: 0.75rem; color: #94a3b8; }
 
         .highlight-apply { border: 2px solid #22c55e !important; }
+        .doc-highlight { border: 2px solid #0ea5e9 !important; }
 
         /* 7. النوافذ المنبثقة */
         .modal {
@@ -121,11 +122,10 @@
         }
         .modal-content {
             background: #1e293b; width: 90%; max-width: 420px;
-            border-radius: 25px; padding: 30px; border: 1px solid #0ea5e9;
-            box-shadow: 0 0 30px rgba(14, 165, 233, 0.2);
+            border-radius: 25px; padding: 25px; border: 1px solid #0ea5e9;
         }
         .leader-card {
-            background: #0f172a; padding: 15px; margin-bottom: 12px;
+            background: #0f172a; padding: 15px; margin-bottom: 10px;
             border-radius: 15px; display: flex; align-items: center; gap: 15px;
             border-right: 5px solid #0ea5e9;
         }
@@ -163,12 +163,12 @@
     </div>
 
     <div class="search-section">
-        <h3 style="font-size: 0.9rem; color: #0ea5e9;"><i class="fas fa-search"></i> استعلام الموظفين</h3>
+        <h3 style="font-size: 0.85rem; color: #0ea5e9;"><i class="fas fa-search"></i> استعلام الموظفين</h3>
         <div class="search-box">
-            <input type="text" id="empCode" placeholder="أدخل الكود الطبي (مثال: 101)">
+            <input type="text" id="empCode" placeholder="أدخل الكود الطبي">
             <button onclick="runCheck()">بحث</button>
         </div>
-        <div id="checkResult" style="margin-top: 12px; font-size: 0.85rem; display: none;"></div>
+        <div id="checkResult" style="margin-top: 10px; font-size: 0.8rem; display: none;"></div>
     </div>
 
     <div class="main-content">
@@ -177,71 +177,77 @@
             <div class="card-info"><h3>تقديم طلب انضمام</h3><p>التحق بالكادر الطبي لقطاع الرياض</p></div>
         </a>
 
+        <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="action-card doc-highlight">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <div class="card-info"><h3>مستند بيانات الصحة</h3><p>الأكواد، السجلات، والملفات الإدارية</p></div>
+        </a>
+
+        <a href="https://discord.com/channels/1458621814975631524/1478981935417004125" class="action-card">
+            <div class="card-icon"><i class="fab fa-discord"></i></div>
+            <div class="card-info"><h3>حجز موعد طبي</h3><p>تنسيق الكشوفات واللقاحات الفورية</p></div>
+        </a>
+
         <a href="javascript:void(0)" class="action-card" onclick="openModal('uniformModal')">
             <div class="card-icon"><i class="fas fa-tshirt"></i></div>
             <div class="card-info"><h3>دليل الزي الرسمي</h3><p>كتالوج اللبس المعتمد لكل رتبة</p></div>
         </a>
 
-        <a href="javascript:void(0)" class="action-card" onclick="openModal('reportModal')">
-            <div class="card-icon" style="color: #ef4444;"><i class="fas fa-exclamation-triangle"></i></div>
-            <div class="card-info"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة</p></div>
-        </a>
-
         <a href="javascript:void(0)" class="action-card" onclick="openModal('aboutModal')">
             <div class="card-icon"><i class="fas fa-users-cog"></i></div>
-            <div class="card-info"><h3>مجلس القيادة العليا</h3><p>الهيكل الإداري للوزارة</p></div>
+            <div class="card-info"><h3>مجلس القيادة العليا</h3><p>تعرف على الهيكل الإداري للوزارة</p></div>
+        </a>
+
+        <a href="javascript:void(0)" class="action-card" onclick="openModal('reportModal')">
+            <div class="card-icon" style="color:#ef4444;"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="card-info"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة</p></div>
         </a>
     </div>
 
     <div id="aboutModal" class="modal">
         <div class="modal-content">
-            <h2 style="text-align:center; margin-bottom:20px; color:#0ea5e9;">القيادة العليا</h2>
-            <div class="leader-card"><i class="fas fa-crown" style="color:#facc15;"></i><div><h3>ريان الشريف</h3><p>وزير الصحة</p></div></div>
-            <div class="leader-card"><i class="fas fa-star" style="color:#0ea5e9;"></i><div><h3>كريم السيد</h3><p>نائب وزير الصحة</p></div></div>
-            <button onclick="closeModal('aboutModal')" style="width:100%; padding:12px; background:#0ea5e9; border:none; color:white; border-radius:12px; cursor:pointer;">إغلاق</button>
+            <h2 style="text-align:center; margin-bottom:15px; color:#0ea5e9;">القيادة العليا</h2>
+            <div class="leader-card"><div><h3>ريان الشريف</h3><p>وزير الصحة</p></div></div>
+            <div class="leader-card"><div><h3>كريم السيد</h3><p>نائب وزير الصحة</p></div></div>
+            <button onclick="closeModal('aboutModal')" style="width:100%; padding:10px; background:#0ea5e9; border:none; color:white; border-radius:10px; cursor:pointer;">إغلاق</button>
         </div>
     </div>
 
     <div id="uniformModal" class="modal">
         <div class="modal-content">
-            <h3 style="text-align:center; color:#0ea5e9; margin-bottom:15px;">دليل الزي الموحد</h3>
+            <h3 style="text-align:center; color:#0ea5e9; margin-bottom:15px;">الزي الرسمي</h3>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div style="background:#0f172a; padding:15px; border-radius:15px; text-align:center;"><i class="fas fa-user-md" style="font-size:2rem; color:#0ea5e9;"></i><p>استشاري</p></div>
-                <div style="background:#0f172a; padding:15px; border-radius:15px; text-align:center;"><i class="fas fa-ambulance" style="font-size:2rem; color:#0ea5e9;"></i><p>مسعف</p></div>
+                <div style="background:#0f172a; padding:10px; border-radius:10px; text-align:center;"><i class="fas fa-user-md" style="font-size:1.5rem; color:#0ea5e9;"></i><p>استشاري</p></div>
+                <div style="background:#0f172a; padding:10px; border-radius:10px; text-align:center;"><i class="fas fa-ambulance" style="font-size:1.5rem; color:#0ea5e9;"></i><p>مسعف</p></div>
             </div>
-            <button onclick="closeModal('uniformModal')" style="width:100%; padding:12px; background:#0ea5e9; border:none; color:white; border-radius:12px; cursor:pointer; margin-top:15px;">إغلاق</button>
+            <button onclick="closeModal('uniformModal')" style="width:100%; padding:10px; background:#0ea5e9; border:none; color:white; border-radius:10px; cursor:pointer; margin-top:15px;">إغلاق</button>
         </div>
     </div>
 
     <div id="reportModal" class="modal">
         <div class="modal-content">
-            <h3 style="color:#ef4444; text-align:center; margin-bottom:15px;">تقديم بلاغ سري</h3>
-            <textarea placeholder="اكتب تفاصيل البلاغ هنا..." style="width:100%; height:100px; background:#0f172a; border:1px solid #334155; color:white; padding:10px; border-radius:10px; resize:none;"></textarea>
-            <button style="width:100%; padding:12px; background:#ef4444; border:none; color:white; border-radius:12px; margin-top:10px; font-weight:bold;">إرسال للوزارة</button>
-            <button onclick="closeModal('reportModal')" style="width:100%; padding:8px; background:transparent; border:none; color:#94a3b8; cursor:pointer; margin-top:5px;">إلغاء</button>
+            <h3 style="color:#ef4444; text-align:center; margin-bottom:10px;">بلاغ سري</h3>
+            <textarea placeholder="تفاصيل البلاغ..." style="width:100%; height:80px; background:#0f172a; border:1px solid #334155; color:white; padding:10px; border-radius:10px; resize:none;"></textarea>
+            <button style="width:100%; padding:10px; background:#ef4444; border:none; color:white; border-radius:10px; margin-top:10px;">إرسال</button>
+            <button onclick="closeModal('reportModal')" style="width:100%; background:transparent; border:none; color:#94a3b8; margin-top:5px; cursor:pointer;">إلغاء</button>
         </div>
     </div>
 
-    <footer>حقوق النشر محفوظة © بوابة وزارة الصحة | الرياض NS x 79 - 2026</footer>
+    <footer>حقوق النشر محفوظة © بوابة وزارة الصحة | 2026</footer>
 
     <script>
         function openModal(id) { document.getElementById(id).style.display = "flex"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
-        
         function runCheck() {
-            let code = document.getElementById('empCode').value.toUpperCase();
+            let code = document.getElementById('empCode').value;
             let res = document.getElementById('checkResult');
             res.style.display = 'block';
-            if(code === "101") { res.innerHTML = "<span style='color:#22c55e'>✅ الملف نظيف | الرتبة: مسعف أول</span>"; }
-            else { res.innerHTML = "<span style='color:#ef4444'>❌ كود غير مسجل في قاعدة البيانات</span>"; }
+            if(code === "101") { res.innerHTML = "<span style='color:#22c55e'>✅ السجل نظيف</span>"; }
+            else { res.innerHTML = "<span style='color:#ef4444'>❌ كود غير مسجل</span>"; }
         }
-
         function updateDateTime() {
             const now = new Date();
-            const dateOpt = { year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOpt = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG', dateOpt);
-            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', timeOpt);
+            document.getElementById('current-date').innerText = now.toLocaleDateString('ar-EG');
+            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG');
         }
         setInterval(updateDateTime, 1000); updateDateTime();
     </script>
