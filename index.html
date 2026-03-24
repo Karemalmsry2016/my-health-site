@@ -3,47 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وزارة الصحة</title>
+    <title>وزارة الصحة | الرياض NS x 79</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --primary: #0ea5e9; --success: #22c55e; --danger: #ef4444; --dark: #0b1120; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--dark); color: #f8fafc; direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+        /* الهيدر */
+        .main-header { width: 100%; background: #1e293b; padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ns-badge { background: var(--primary); color: white; padding: 8px 25px; border-radius: 50px; font-weight: 900; margin-bottom: 15px; display: inline-block; }
+        .datetime-display { margin-top: 20px; display: flex; justify-content: center; gap: 30px; color: #94a3b8; font-size: 1.1rem; }
+        .datetime-display i { color: var(--primary); margin-left: 8px; }
+
+        .container { width: 100%; max-width: 500px; padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+
+        /* الاستعلام */
+        .box { background: rgba(30, 41, 59, 0.7); border-radius: 25px; padding: 25px; border: 1px solid rgba(14, 165, 233, 0.2); text-align: center; }
+        .input-box { display: flex; gap: 10px; margin-top: 15px; }
+        .input-style { flex: 1; padding: 15px; border-radius: 15px; border: 1px solid #334155; background: #0b1120; color: white; outline: none; text-align: center; }
+        .btn-blue { padding: 0 20px; background: var(--primary); border: none; color: white; border-radius: 15px; cursor: pointer; font-weight: bold; }
+
+        /* البطاقات */
+        .nav-card { background: rgba(30, 41, 59, 0.8); border-radius: 22px; padding: 22px; display: flex; align-items: center; text-decoration: none; color: white; border: 1px solid transparent; transition: 0.3s; cursor: pointer; }
+        .nav-card:hover { border-color: var(--primary); transform: translateX(-5px); background: #1e293b; }
+        .icon-box { width: 55px; height: 55px; background: rgba(14, 165, 233, 0.1); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.6rem; }
+        .info-box { flex: 1; margin-right: 18px; text-align: right; }
+        .info-box h3 { font-size: 1.1rem; margin-bottom: 4px; }
+        .info-box p { font-size: 0.8rem; color: #94a3b8; }
+
+        /* الإدارة */
+        #adminArea { display: none; background: #0f172a; border: 2px solid var(--success); margin-top: 20px; padding: 25px; border-radius: 25px; }
+        .admin-trigger { font-size: 0.8rem; color: #475569; cursor: pointer; text-align: center; padding: 40px 0; text-decoration: underline; }
+
+        /* النوافذ */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .modal-content { background: #1e293b; width: 85%; max-width: 400px; padding: 35px; border-radius: 30px; border: 1px solid var(--primary); position: relative; text-align: center; }
+        .close-btn { position: absolute; top: 20px; left: 20px; color: #94a3b8; cursor: pointer; font-size: 1.3rem; }
+
+        #resultPanel { margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 15px; display: none; border-right: 5px solid var(--primary); text-align: right; }
+    </style>
 </head>
 <body>
+
     <header class="main-header">
         <div class="ns-badge">NS x 79 RIYADH</div>
         <h1>وزارة الصحة</h1>
         <div class="datetime-display">
-            <span><i class="far fa-calendar-alt"></i> <span id="dateDisplay">--</span></span>
+            <span><i class="far fa-calendar-alt"></i> <span id="dateDisplay">-- / -- / ----</span></span>
             <span><i class="far fa-clock"></i> <span id="timeDisplay">00:00:00</span></span>
         </div>
     </header>
 
     <div class="container">
         <div class="box">
+            <h3 style="color:var(--primary); text-align:right;"><i class="fas fa-id-card-alt"></i> استعلام الحالة الوظيفية</h3>
             <div class="input-box">
-                <input type="text" id="empSearchInput" class="input-style" placeholder="أدخل الكود">
-                <button class="btn-blue" onclick="searchEmp()">استعلام</button>
+                <input type="text" id="empSearchInput" class="input-style" placeholder="أدخل الكود الطبي">
+                <button class="btn-blue" onclick="executeSearch()">استعلام</button>
             </div>
             <div id="resultPanel"></div>
         </div>
 
-        <div class="nav-card" onclick="openPopup('uniformPop')">
+        <div class="nav-card" onclick="togglePopup('uniformPop', true)">
             <div class="icon-box"><i class="fas fa-tshirt"></i></div>
-            <div class="info-box"><h3>دليل الزي الرسمي</h3></div>
+            <div class="info-box"><h3>دليل الزي الرسمي</h3><p>شكل اللباس المعتمد لكل رتبة</p></div>
         </div>
 
-        <div class="admin-trigger" onclick="loginAdmin()">دخول لوحة الإدارة (Admin)</div>
+        <div class="nav-card" onclick="togglePopup('reportPop', true)">
+            <div class="icon-box" style="color:var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="info-box"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة</p></div>
+        </div>
 
-        <div id="adminArea" class="box" style="display:none;">
-            <input type="text" id="admId" class="input-style" placeholder="الكود">
-            <input type="text" id="admRank" class="input-style" placeholder="الرتبة">
-            <input type="text" id="admStatus" class="input-style" placeholder="المخالفات">
-            <button class="btn-blue" onclick="saveData()">حفظ</button>
+        <div class="nav-card" onclick="togglePopup('leaderPop', true)">
+            <div class="icon-box" style="color: #f59e0b;"><i class="fas fa-crown"></i></div>
+            <div class="info-box"><h3>مجلس القيادة العليا</h3><p>ريان الشريف & كريم السيد</p></div>
+        </div>
+
+        <div class="admin-trigger" onclick="adminLogin()">دخول لوحة الإدارة (Admin)</div>
+
+        <div id="adminArea">
+            <h3 style="color:var(--success); margin-bottom:15px;">لوحة التحكم</h3>
+            <input type="text" id="admId" class="input-style" placeholder="كود الموظف" style="width:100%; margin-bottom:10px;">
+            <input type="text" id="admRank" class="input-style" placeholder="الرتبة" style="width:100%; margin-bottom:10px;">
+            <input type="text" id="admStatus" class="input-style" placeholder="المخالفات" style="width:100%; margin-bottom:10px;">
+            <button class="btn-blue" style="background:var(--success); width:100%; padding:15px;" onclick="saveEmpData()">حفظ البيانات</button>
+            <button onclick="document.getElementById('adminArea').style.display='none'" style="background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">إغلاق</button>
         </div>
     </div>
 
-    <div id="uniformPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('uniformPop')"></i><h2>دليل الزي</h2><p>الزي الرسمي المعتمد لقطاع الرياض.</p></div></div>
+    <div id="uniformPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="togglePopup('uniformPop', false)"></i><h2>دليل الزي</h2><p>الزي الرسمي يحدد حسب رتبتك الإدارية.</p></div></div>
+    <div id="reportPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="togglePopup('reportPop', false)"></i><h2>بلاغ سري</h2><textarea class="input-style" style="width:100%; height:100px; margin-top:10px;" placeholder="اكتب هنا.."></textarea><button class="btn-blue" style="margin-top:10px; width:100%; background:var(--danger)">إرسال</button></div></div>
+    <div id="leaderPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="togglePopup('leaderPop', false)"></i><h2>مجلس القيادة</h2><p>الوزير: ريان الشريف<br>النائب: كريم السيد</p></div></div>
 
-    <script src="script.js"></script>
+    <script>
+        // 1. إصلاح الساعة (تعديل جذري)
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB'); // صيغة 24 ساعة لضمان القراءة
+            const dateStr = now.toLocaleDateString('ar-EG');
+            
+            if(document.getElementById('timeDisplay')) document.getElementById('timeDisplay').innerText = timeStr;
+            if(document.getElementById('dateDisplay')) document.getElementById('dateDisplay').innerText = dateStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 2. إصلاح النوافذ (تعديل جذري)
+        function togglePopup(id, show) {
+            const el = document.getElementById(id);
+            if(el) el.style.display = show ? 'flex' : 'none';
+        }
+
+        // 3. إصلاح الأدمن والبحث
+        function adminLogin() {
+            const u = prompt("User:");
+            const p = prompt("Pass:");
+            if(u === "Admin" && p === "@Admin") {
+                document.getElementById('adminArea').style.display = 'block';
+            } else { alert("خطأ!"); }
+        }
+
+        function saveEmpData() {
+            const id = document.getElementById('admId').value;
+            const r = document.getElementById('admRank').value;
+            const s = document.getElementById('admStatus').value || "سليم";
+            if(id && r) {
+                localStorage.setItem('MOH_' + id, JSON.stringify({rank: r, status: s}));
+                alert("تم الحفظ بنجاح للموظف: " + id);
+            }
+        }
+
+        function executeSearch() {
+            const id = document.getElementById('empSearchInput').value;
+            const res = document.getElementById('resultPanel');
+            const data = localStorage.getItem('MOH_' + id);
+            res.style.display = 'block';
+            if(data) {
+                const info = JSON.parse(data);
+                res.innerHTML = `<p>الرتبة: ${info.rank}</p><p>الحالة: ${info.status}</p>`;
+            } else {
+                res.innerHTML = "غير مسجل!";
+            }
+        }
+    </script>
 </body>
 </html>
