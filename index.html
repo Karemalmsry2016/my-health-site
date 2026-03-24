@@ -3,557 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وزارة الصحة | البوابة الرقمية المتكاملة - NS x 79</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>وزارة الصحة | الرياض NS x 79</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* =========================================
-           1. الإعدادات العامة والمتغيرات (Root)
-           ========================================= */
-        :root {
-            --primary-color: #0ea5e9;
-            --secondary-color: #38bdf8;
-            --accent-color: #22c55e;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
-            --dark-bg: #0b1120;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --glass-effect: blur(12px);
-            --border-style: 1px solid rgba(14, 165, 233, 0.2);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #f8fafc;
-            direction: rtl;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* =========================================
-           2. الخلفية المتحركة (Animated Background)
-           ========================================= */
-        .bg-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
-            opacity: 0.15;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .glow-circle {
-            position: fixed;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(50px);
-            animation: floatGlow 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes floatGlow {
-            0% { top: -10%; left: -10%; }
-            100% { bottom: -10%; right: -10%; }
-        }
-
-        /* =========================================
-           3. الهيدر (Header Section)
-           ========================================= */
-        .main-header {
-            width: 100%;
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-            padding: 45px 20px;
-            text-align: center;
-            border-bottom: 4px solid var(--primary-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-
-        .ns-badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 7px 22px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 0.85rem;
-            display: inline-block;
-            margin-bottom: 18px;
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
-            text-transform: uppercase;
-        }
-
-        .main-header h1 {
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-        }
-
-        .main-header p {
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            opacity: 0.8;
-        }
-
-        .datetime-wrapper {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            font-size: 0.95rem;
-            color: #94a3b8;
-        }
-
-        .datetime-wrapper span i {
-            color: var(--primary-color);
-            margin-left: 8px;
-        }
-
-        /* =========================================
-           4. شريط الأخبار (News Ticker)
-           ========================================= */
-        .news-ticker-container {
-            width: 100%;
-            background: rgba(14, 165, 233, 0.05);
-            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
-            padding: 12px 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .ticker-text {
-            display: inline-block;
-            animation: tickerMove 35s linear infinite;
-            font-weight: 700;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .ticker-text span {
-            margin-left: 120px;
-        }
-
-        @keyframes tickerMove {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* =========================================
-           5. المحتوى الرئيسي (Container)
-           ========================================= */
-        .app-container {
-            width: 100%;
-            max-width: 550px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            z-index: 10;
-        }
-
-        /* =========================================
-           6. نظام الاستعلام (Search UI)
-           ========================================= */
-        .search-card {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-effect);
-            border: var(--border-style);
-            border-radius: 25px;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .search-card h2 {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .input-box {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .input-box input {
-            flex: 1;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid #334155;
-            background: #0f172a;
-            color: white;
-            outline: none;
-            transition: var(--transition);
-            text-align: center;
-            font-size: 1rem;
-        }
-
-        .input-box input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
-        }
-
-        .btn-search {
-            padding: 0 25px;
-            background: var(--primary-color);
-            border: none;
-            color: white;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-search:hover {
-            background: var(--secondary-color);
-            transform: scale(1.05);
-        }
-
-        .search-result-panel {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 18px;
-            display: none;
-            text-align: right;
-            border-right: 5px solid var(--primary-color);
-            animation: slideDown 0.4s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* =========================================
-           7. الأزرار التفاعلية (Navigation Cards)
-           ========================================= */
-        .nav-item {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-effect);
-            border: var(--border-style);
-            border-radius: 22px;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .nav-item:hover {
-            transform: translateX(-10px);
-            border-color: var(--primary-color);
-            background: rgba(30, 41, 59, 0.9);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        .nav-item i.main-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(14, 165, 233, 0.1);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-        }
-
-        .nav-text {
-            flex: 1;
-            margin-right: 20px;
-        }
-
-        .nav-text h3 {
-            font-size: 1.15rem;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .nav-text p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
-
-        .apply-card {
-            border: 2px solid var(--accent-color) !important;
-        }
-
-        /* =========================================
-           8. لوحة الإدارة (Admin Panel)
-           ========================================= */
-        .admin-trigger {
-            font-size: 0.8rem;
-            color: #475569;
-            cursor: pointer;
-            text-align: center;
-            margin: 40px 0 10px;
-            text-decoration: underline;
-            opacity: 0.6;
-        }
-
-        .admin-panel {
-            display: none;
-            background: #0f172a;
-            border: 2px solid var(--accent-color);
-            border-radius: 25px;
-            padding: 35px;
-            margin-top: 10px;
-            box-shadow: 0 0 40px rgba(34, 197, 94, 0.15);
-        }
-
-        .admin-panel h2 {
-            color: var(--accent-color);
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.3rem;
-        }
-
-        .admin-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .btn-admin-save {
-            background: var(--accent-color);
-            color: white;
-            padding: 16px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 900;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* =========================================
-           9. النوافذ المنبثقة (Modals)
-           ========================================= */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(15px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: #1e293b;
-            width: 90%;
-            max-width: 450px;
-            border-radius: 30px;
-            padding: 40px;
-            border: 1px solid var(--primary-color);
-            position: relative;
-            text-align: center;
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.5rem;
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
-        /* =========================================
-           10. التذييل (Footer)
-           ========================================= */
-        .main-footer {
-            padding: 60px 20px;
-            text-align: center;
-            width: 100%;
-            color: #475569;
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-
-        .footer-line {
-            width: 50px;
-            height: 2px;
-            background: var(--primary-color);
-            margin: 15px auto;
-            opacity: 0.3;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-
-    <div class="bg-overlay"></div>
-    <div class="glow-circle"></div>
 
     <header class="main-header">
         <div class="ns-badge">NS x 79 RIYADH</div>
         <h1>وزارة الصحة</h1>
-        <p>البوابة الإلكترونية الشاملة للخدمات الطبية</p>
-        
-        <div class="datetime-wrapper">
-            <span><i class="fas fa-calendar-day"></i> <span id="currentDate">-- / -- / ----</span></span>
-            <span><i class="fas fa-clock"></i> <span id="currentTime">00:00:00</span></span>
+        <div class="datetime-display">
+            <span><i class="far fa-calendar-alt"></i> <span id="dateDisplay">-- / -- / ----</span></span>
+            <span><i class="far fa-clock"></i> <span id="timeDisplay">00:00:00</span></span>
         </div>
     </header>
 
-    <div class="news-ticker-container">
-        <div class="ticker-text">
-            <span>📢 تعميم وزاري: يمنع استخدام القوة المفرطة في التعامل مع الحالات النفسية..</span>
-            <span>✅ تحديث: تم ربط قاعدة بيانات الموظفين بنظام الاستعلام الذكي..</span>
-            <span>⚠️ تنبيه: يرجى الالتزام بالزي الرسمي في جميع المناوبات الميدانية..</span>
-            <span>📢 عاجل: فتح باب التسجيل لدفعة "المسعف المتقدم" لعام 2026..</span>
-        </div>
-    </div>
-
-    <main class="app-container">
-
-        <section class="search-card">
-            <h2><i class="fas fa-user-shield"></i> استعلام الحالة الوظيفية</h2>
+    <div class="container">
+        <div class="box">
+            <h3 style="color:var(--primary); text-align:right;"><i class="fas fa-id-card-alt"></i> استعلام الحالة الوظيفية</h3>
             <div class="input-box">
-                <input type="text" id="searchInput" placeholder="أدخل الكود الطبي الخاص بك">
-                <button class="btn-search" onclick="handleUserSearch()">استعلام</button>
+                <input type="text" id="empSearchInput" class="input-style" placeholder="أدخل الكود الطبي الخاص">
+                <button class="btn-blue" id="searchBtn">استعلام</button>
             </div>
-            <div id="resultPanel" class="search-result-panel">
-                </div>
-        </section>
-
-        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="nav-item apply-card">
-            <i class="fas fa-id-badge main-icon" style="color: var(--accent-color);"></i>
-            <div class="nav-text">
-                <h3>تقديم طلب توظيف</h3>
-                <p>سجل بياناتك للالتحاق بالكادر الطبي لقطاع الرياض</p>
-            </div>
-            <i class="fas fa-chevron-left" style="opacity: 0.2;"></i>
-        </a>
-
-        <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="nav-item">
-            <i class="fas fa-database main-icon"></i>
-            <div class="nav-text">
-                <h3>مستند بيانات المسعفين</h3>
-                <p>الأكواد، السجلات الإدارية، والملفات الرسمية للموظفين</p>
-            </div>
-            <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.3;"></i>
-        </a>
-
-        <a href="https://discord.com/channels/1458621814975631524/1478981935417004125" class="nav-item">
-            <i class="fas fa-calendar-check main-icon"></i>
-            <div class="nav-text">
-                <h3>حجز موعد طبي</h3>
-                <p>تنسيق الكشوفات واللقاحات الطبية للمواطنين</p>
-            </div>
-        </a>
-
-        <div class="nav-item" style="cursor: pointer;" onclick="toggleModal('uniformModal', true)">
-            <i class="fas fa-tshirt main-icon"></i>
-            <div class="nav-text">
-                <h3>دليل الزي الرسمي</h3>
-                <p>كتالوج اللباس المعتمد لجميع الرتب من مسعف إلى وزير</p>
-            </div>
+            <div id="resultPanel"></div>
         </div>
 
-        <div class="nav-item" style="cursor: pointer;" onclick="toggleModal('reportModal', true)">
-            <i class="fas fa-user-secret main-icon" style="color: var(--danger-color);"></i>
-            <div class="nav-text">
-                <h3>بلاغ إداري سري</h3>
-                <p>تقديم شكوى أو ملاحظة تصل للقيادة العليا مباشرة</p>
-            </div>
+        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="nav-card" style="border: 1px solid var(--success);">
+            <div class="icon-box" style="color:var(--success);"><i class="fas fa-user-plus"></i></div>
+            <div class="info-box"><h3>تقديم طلب توظيف</h3><p>سجل بياناتك للالتحاق بالكادر الطبي</p></div>
+        </a>
+
+        <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="nav-card">
+            <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
+            <div class="info-box"><h3>مستند بيانات المسعفين</h3><p>سجل الأكواد والملفات الإدارية</p></div>
+        </a>
+
+        <div class="nav-card" id="btnUniform">
+            <div class="icon-box"><i class="fas fa-tshirt"></i></div>
+            <div class="info-box"><h3>دليل الزي الرسمي</h3><p>شكل اللباس المعتمد لكل رتبة</p></div>
         </div>
 
-        <div class="nav-item" style="cursor: pointer;" onclick="toggleModal('leadershipModal', true)">
-            <i class="fas fa-crown main-icon" style="color: var(--warning-color);"></i>
-            <div class="nav-text">
-                <h3>مجلس القيادة العليا</h3>
-                <p>الهيكل الإداري لوزارة الصحة بقطاع الرياض</p>
-            </div>
+        <div class="nav-card" id="btnReport">
+            <div class="icon-box" style="color:var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="info-box"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة</p></div>
         </div>
 
-        <div class="admin-trigger" onclick="authenticateAdmin()">دخول لوحة الإدارة (Admin Login)</div>
+        <div class="nav-card" id="btnLeader">
+            <div class="icon-box" style="color: #f59e0b;"><i class="fas fa-crown"></i></div>
+            <div class="info-box"><h3>مجلس القيادة العليا</h3><p>ريان الشريف & كريم السيد</p></div>
+        </div>
 
-        <section id="adminPanelArea" class="admin-panel">
-            <h2><i class="fas fa-tools"></i> نظام إدارة الموظفين</h2>
-            <div class="admin-form">
-                <input type="text" id="admId" class="input-box input" style="width:100%" placeholder="رقم كود الموظف">
-                <input type="text" id="admRank" class="input-box input" style="width:100%" placeholder="الرتبة الجديدة">
-                <input type="text" id="admViol" class="input-box input" style="width:100%" placeholder="المخالفات أو (سليم)">
-                <button class="btn-admin-save" onclick="saveToDatabase()">حفظ وتحديث البيانات</button>
-                <button onclick="toggleAdminPanel(false)" style="background:transparent; border:none; color:#94a3b8; cursor:pointer;">إغلاق اللوحة</button>
-            </div>
-        </section>
+        <div class="admin-trigger" id="adminLoginTrigger">دخول لوحة الإدارة (Admin)</div>
 
-    </main>
-
-    <div id="uniformModal" class="modal-overlay">
-        <div class="modal-content">
-            <i class="fas fa-times close-modal-btn" onclick="toggleModal('uniformModal', false)"></i>
-            <h2 style="color:var(--primary-color); margin-bottom:20px;">دليل الزي المعتمد</h2>
-            <p style="font-size:0.9rem; line-height:1.6;">يجب الالتزام بالزي الرسمي المحدد في القوانين. أي مخالفة في الزي تعرض صاحبها للمساءلة القانونية.</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:25px;">
-                <div style="background:#0b1120; padding:15px; border-radius:15px;"><i class="fas fa-user-md" style="font-size:2rem; color:var(--primary-color);"></i><p>زي الأطباء</p></div>
-                <div style="background:#0b1120; padding:15px; border-radius:15px;"><i class="fas fa-ambulance" style="font-size:2rem; color:var(--primary-color);"></i><p>زي المسعفين</p></div>
-            </div>
+        <div id="adminArea" class="box" style="display: none;">
+            <h3 style="color:var(--success); margin-bottom:15px;">لوحة التحكم</h3>
+            <input type="text" id="admId" class="input-style" placeholder="كود الموظف" style="margin-bottom:10px; width:100%;">
+            <input type="text" id="admRank" class="input-style" placeholder="الرتبة" style="margin-bottom:10px; width:100%;">
+            <input type="text" id="admStatus" class="input-style" placeholder="المخالفات" style="margin-bottom:10px; width:100%;">
+            <button class="btn-blue" id="saveEmpBtn" style="background:var(--success); width:100%; padding:15px;">حفظ البيانات</button>
+            <button id="closeAdminBtn" style="background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">إغلاق</button>
         </div>
     </div>
 
-    <div id="reportModal" class="modal-overlay">
-        <div class="modal-box modal-content">
-            <i class="fas fa-times close-modal-btn" onclick="toggleModal('reportModal', false)"></i>
-            <h2 style="color:var(--danger-color); margin-bottom:20px;">تقديم بلاغ سري</h2>
-            <textarea placeholder="اكتب تفاصيل البلاغ هنا..." style="width:100%; height:120px; background:#0b1120; border:1px solid #334155; border-radius:15px; padding:15px; color:white; resize:none; font-family:'Cairo';"></textarea>
-            <button class="btn-search" style="width:100%; margin-top:15px; padding:15px; background:var(--danger-color);">إرسال البلاغ فوراً</button>
-        </div>
-    </div>
+    <div id="uniformPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('uniformPop')"></i><h2>دليل الزي</h2><p>يتم تحديد الزي بناءً على الرتبة المذكورة في الديسكورد.</p></div></div>
+    
+    <div id="reportPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('reportPop')"></i><h2 style="color:var(--danger)">بلاغ سري</h2><textarea style="width:100%; height:100px; background:#0b1120; color:white; margin-top:15px; border-radius:10px; padding:10px; border:1px solid #334155;" placeholder="تفاصيل البلاغ..."></textarea><button class="btn-blue" style="width:100%; margin-top:10px; padding:10px; background:var(--danger)">إرسال</button></div></div>
+    
+    <div id="leaderPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('leaderPop')"></i><h2>مجلس القيادة</h2><p>الوزير: ريان الشريف<br>نائب الوزير: كريم السيد</p></div></div>
 
-    <div id="leadershipModal" class="modal-overlay">
-        <div class="modal-content">
-            <i class="fas fa-times close-modal-btn" onclick="toggleModal('leadershipModal', false)"></i>
-            <h2 style="color:var(--warning-color); margin-bottom:25px;">القيادة العليا للوزارة</h2>
-            <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:20px; border-right:6px solid var(--warning-color); margin-bottom:15px; text-align:right;">
-                <h4 style="font-size:1.3rem;">ريان الشريف</h4>
-                <p style="color:var(--warning-color); font-weight:700;">وزير الصحة بقطاع الرياض</p>
-            </div>
-            <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:20px; border-right:6px solid var(--primary-color); text-align:right;">
-                <h4 style="font-size:1.3rem;">كريم السيد</h4>
-                <p style="color:var(--primary-color); font-weight:700;">نائب وزير الصحة بقطاع الرياض</p>
-            </div>
-        </div>
-    </div>
-
-    <footer class="main-footer">
-        <div class="footer-line"></div>
-        <p>جميع الحقوق محفوظة © بوابة وزارة الصحة - الرياض NS x 79</p>
-        <p style="opacity: 0.5; font-size: 0.75rem; margin-top: 5px;">تم التطوير والبرمجة بواسطة الإدارة العليا لعام 2026</p>
-    </footer>
-
-    <script>
-        /* 1. نظام الوقت والتاريخ */
-        function startClock() {
-            const dateEl = document.getElementById('currentDate');
-            const timeEl = document.getElementById('currentTime');
-            
-            setInterval(() => {
-                const now = new Date();
-              
+    <script src="script.js"></script>
+</body>
+</html>
