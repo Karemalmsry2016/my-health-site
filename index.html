@@ -3,74 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وزارة الصحة | الرياض NS x 79</title>
+    <title>وزارة الصحة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header class="main-header">
         <div class="ns-badge">NS x 79 RIYADH</div>
         <h1>وزارة الصحة</h1>
         <div class="datetime-display">
-            <span><i class="far fa-calendar-alt"></i> <span id="dateDisplay">-- / -- / ----</span></span>
+            <span><i class="far fa-calendar-alt"></i> <span id="dateDisplay">--</span></span>
             <span><i class="far fa-clock"></i> <span id="timeDisplay">00:00:00</span></span>
         </div>
     </header>
 
     <div class="container">
         <div class="box">
-            <h3 style="color:var(--primary); text-align:right;"><i class="fas fa-id-card-alt"></i> استعلام الحالة الوظيفية</h3>
             <div class="input-box">
-                <input type="text" id="empSearchInput" class="input-style" placeholder="أدخل الكود الطبي الخاص">
-                <button class="btn-blue" id="searchBtn">استعلام</button>
+                <input type="text" id="empSearchInput" class="input-style" placeholder="أدخل الكود">
+                <button class="btn-blue" onclick="searchEmp()">استعلام</button>
             </div>
             <div id="resultPanel"></div>
         </div>
 
-        <a href="https://discord.com/channels/1458621814975631524/1478983053966573671" class="nav-card" style="border: 1px solid var(--success);">
-            <div class="icon-box" style="color:var(--success);"><i class="fas fa-user-plus"></i></div>
-            <div class="info-box"><h3>تقديم طلب توظيف</h3><p>سجل بياناتك للالتحاق بالكادر الطبي</p></div>
-        </a>
-
-        <a href="https://docs.google.com/spreadsheets/d/1AiIwMNLrx6WpX4KAWlaoYw6QTVOR2gGFlOmPbv4_idg/edit?usp=drivesdk" target="_blank" class="nav-card">
-            <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
-            <div class="info-box"><h3>مستند بيانات المسعفين</h3><p>سجل الأكواد والملفات الإدارية</p></div>
-        </a>
-
-        <div class="nav-card" id="btnUniform">
+        <div class="nav-card" onclick="openPopup('uniformPop')">
             <div class="icon-box"><i class="fas fa-tshirt"></i></div>
-            <div class="info-box"><h3>دليل الزي الرسمي</h3><p>شكل اللباس المعتمد لكل رتبة</p></div>
+            <div class="info-box"><h3>دليل الزي الرسمي</h3></div>
         </div>
 
-        <div class="nav-card" id="btnReport">
-            <div class="icon-box" style="color:var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
-            <div class="info-box"><h3>بلاغ إداري سري</h3><p>إرسال شكوى مباشرة للقيادة</p></div>
-        </div>
+        <div class="admin-trigger" onclick="loginAdmin()">دخول لوحة الإدارة (Admin)</div>
 
-        <div class="nav-card" id="btnLeader">
-            <div class="icon-box" style="color: #f59e0b;"><i class="fas fa-crown"></i></div>
-            <div class="info-box"><h3>مجلس القيادة العليا</h3><p>ريان الشريف & كريم السيد</p></div>
-        </div>
-
-        <div class="admin-trigger" id="adminLoginTrigger">دخول لوحة الإدارة (Admin)</div>
-
-        <div id="adminArea" class="box" style="display: none;">
-            <h3 style="color:var(--success); margin-bottom:15px;">لوحة التحكم</h3>
-            <input type="text" id="admId" class="input-style" placeholder="كود الموظف" style="margin-bottom:10px; width:100%;">
-            <input type="text" id="admRank" class="input-style" placeholder="الرتبة" style="margin-bottom:10px; width:100%;">
-            <input type="text" id="admStatus" class="input-style" placeholder="المخالفات" style="margin-bottom:10px; width:100%;">
-            <button class="btn-blue" id="saveEmpBtn" style="background:var(--success); width:100%; padding:15px;">حفظ البيانات</button>
-            <button id="closeAdminBtn" style="background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">إغلاق</button>
+        <div id="adminArea" class="box" style="display:none;">
+            <input type="text" id="admId" class="input-style" placeholder="الكود">
+            <input type="text" id="admRank" class="input-style" placeholder="الرتبة">
+            <input type="text" id="admStatus" class="input-style" placeholder="المخالفات">
+            <button class="btn-blue" onclick="saveData()">حفظ</button>
         </div>
     </div>
 
-    <div id="uniformPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('uniformPop')"></i><h2>دليل الزي</h2><p>يتم تحديد الزي بناءً على الرتبة المذكورة في الديسكورد.</p></div></div>
-    
-    <div id="reportPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('reportPop')"></i><h2 style="color:var(--danger)">بلاغ سري</h2><textarea style="width:100%; height:100px; background:#0b1120; color:white; margin-top:15px; border-radius:10px; padding:10px; border:1px solid #334155;" placeholder="تفاصيل البلاغ..."></textarea><button class="btn-blue" style="width:100%; margin-top:10px; padding:10px; background:var(--danger)">إرسال</button></div></div>
-    
-    <div id="leaderPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('leaderPop')"></i><h2>مجلس القيادة</h2><p>الوزير: ريان الشريف<br>نائب الوزير: كريم السيد</p></div></div>
+    <div id="uniformPop" class="modal"><div class="modal-content"><i class="fas fa-times close-btn" onclick="closePopup('uniformPop')"></i><h2>دليل الزي</h2><p>الزي الرسمي المعتمد لقطاع الرياض.</p></div></div>
 
     <script src="script.js"></script>
 </body>
